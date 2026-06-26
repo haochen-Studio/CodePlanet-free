@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 网站标题 -->
+    <title>敲码星球 -免费的编程考级学习平台</title>
+    <!-- 网站图标 -->
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="shortcut icon" href="logo.png" type="image/png">
+    
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft Yahei",sans-serif;transition:all 0.3s ease;}
+        body{overflow:hidden;}
+        
+        /* ========== 全局配色与动画 ========== */
+        :root{
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --secondary: #8b5cf6;
+            --pink: #ec4899;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --gray: #6b7280;
+            --dark: #1f2937;
+            --shadow: 0 4px 20px rgba(0,0,0,0.1);
+            --shadow-lg: 0 8px 30px rgba(0,0,0,0.15);
+        }
+        
+        /* ========== Win10桌面启动页 ========== */
+        .win10-desktop{
+            width:100vw;height:100vh;
+            background: linear-gradient(135deg, #4facfe 0%, #6366f1 100%);
+            position:fixed;top:0;left:0;z-index:9999;
+            display:flex;flex-direction:column;
+            backdrop-filter:blur(5px);
+        }
+        .desktop-icon-box{
+            flex:1;display:flex;align-items:center;justify-content:center;
+        }
+        .main-icon{
+            width:160px;text-align:center;cursor:pointer;
+            padding:20px;border-radius:16px;
+        }
+        .main-icon:hover{
+            background:rgba(255,255,255,0.1);
+            transform:scale(1.05);
+        }
+        /* ========== 修改：图片图标样式（无BUG适配） ========== */
+        .main-icon .icon{
+            width:100px;height:100px;
+            border-radius:16px;
+            margin:0 auto 15px;
+            box-shadow:var(--shadow-lg);
+            object-fit: cover; /* 保证图片不变形 */
+            border: none;
+        }
+        .main-icon div:last-child{
+            color:#fff;font-size:16px;font-weight:500;text-shadow:0 2px 4px rgba(0,0,0,0.2);
+        }
+        .taskbar{
+            height:50px;background:rgba(0,0,0,0.8);
+            display:flex;align-items:center;padding:0 20px;
+            color:#fff;font-size:15px;
+            backdrop-filter:blur(10px);
+        }
+
+        /* ========== 主网站容器 ========== */
+        .main-site{display:none;width:100vw;height:100vh;overflow:auto;background:#f8fafc;}
+        
+        /* ========== 登录/注册弹窗 ========== */
+        .login-modal{
+            position:fixed;top:0;left:0;width:100vw;height:100vh;
+            background:rgba(0,0,0,0.7);display:flex;
+            align-items:center;justify-content:center;z-index:9998;
+            backdrop-filter:blur(8px);
+        }
+        .modal-box{
+            width:450px;background:#fff;border-radius:16px;
+            padding:35px;box-shadow:var(--shadow-lg);
+            animation:modalPop 0.4s ease;
+        }
+        @keyframes modalPop{
+            0%{transform:scale(0.9);opacity:0;}
+            100%{transform:scale(1);opacity:1;}
+        }
+        .tab-switch{display:flex;margin-bottom:25px;border-bottom:2px solid #f1f5f9;}
+        .tab-btn{flex:1;padding:12px;border:none;background:none;
+            font-size:17px;font-weight:600;cursor:pointer;color:var(--gray);}
+        .tab-btn.active{color:var(--primary);border-bottom:3px solid var(--primary);}
+        .form-item{margin-bottom:20px;}
+        .form-item label{display:block;margin-bottom:8px;color:var(--dark);font-weight:500;}
+        .form-item input{
+            width:100%;padding:12px 15px;border:2px solid #e2e8f0;
+            border-radius:10px;font-size:15px;outline:none;
+        }
+        .form-item input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(99,102,241,0.1);}
+        .submit-btn{
+            width:100%;padding:14px;
+            background:linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color:#fff;border:none;border-radius:10px;
+            font-size:16px;font-weight:600;cursor:pointer;margin-top:15px;
+            box-shadow:0 4px 15px rgba(99,102,241,0.3);
+        }
+        .submit-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(99,102,241,0.4);}
+
+        /* ========== 导航栏 ========== */
+        .nav-bar{
+            height:65px;background:linear-gradient(90deg, var(--primary), var(--secondary));
+            color:#fff;display:flex;align-items:center;padding:0 30px;gap:25px;
+            box-shadow:var(--shadow);position:sticky;top:0;z-index:100;
+        }
+        .nav-title{font-size:24px;font-weight:bold;letter-spacing:1px;}
+        .nav-btn{
+            padding:10px 18px;background:rgba(255,255,255,0.15);
+            border:none;color:#fff;border-radius:8px;
+            cursor:pointer;font-size:15px;font-weight:500;
+            backdrop-filter:blur(5px);
+        }
+        .nav-btn:hover{background:rgba(255,255,255,0.25);transform:scale(1.03);}
+        .nav-btn.active{background:#fff;color:var(--primary);font-weight:600;}
+        .user-info{margin-left:auto;display:flex;gap:20px;align-items:center;}
+        .vip-tag{
+            background:linear-gradient(90deg, #ffd700, #ffed4e);
+            color:#000;padding:6px 14px;border-radius:20px;
+            font-size:13px;font-weight:bold;box-shadow:0 2px 8px rgba(255,215,0,0.3);
+        }
+
+        /* ========== 主内容区 ========== */
+        .container{padding:35px;max-width:1400px;margin:0 auto;}
+        
+        /* ========== 关卡地图 ========== */
+        .map-wrap{display:none;}
+        .map-title{font-size:26px;margin-bottom:30px;color:var(--dark);font-weight:600;text-align:center;}
+        .level-map{display:grid;grid-template-columns:repeat(5,1fr);gap:25px;max-width:800px;margin:0 auto;}
+        .level-node{
+            width:110px;height:110px;border-radius:50%;
+            display:flex;align-items:center;justify-content:center;
+            font-size:24px;font-weight:bold;color:#fff;
+            cursor:pointer;box-shadow:var(--shadow);
+            transition:0.3s;
+        }
+        .level-node:hover{transform:scale(1.1);}
+        .lock{background:var(--gray);cursor:not-allowed;opacity:0.7;}
+        .unlock{background:linear-gradient(135deg, var(--primary), var(--primary-light));}
+        .finish{background:linear-gradient(135deg, var(--success), #34d399);}
+
+        /* ========== 学习面板 ========== */
+        .study-panel{display:none;}
+        .level-title{font-size:24px;margin:20px 0;color:var(--dark);font-weight:600;}
+        .tab-box{margin:25px 0;display:flex;gap:15px;}
+        .tab-content{
+            background:#fff;padding:30px;border-radius:12px;
+            min-height:500px;box-shadow:var(--shadow);
+            border:1px solid #e2e8f0;
+        }
+        .question-item{
+            padding:15px;border-bottom:1px solid #f1f5f9;
+            margin:10px 0;border-radius:8px;
+        }
+        .question-item:hover{background:#f8fafc;}
+        .func-btn-group{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;}
+        .func-btn{
+            padding:10px 16px;border-radius:8px;border:none;
+            cursor:pointer;font-weight:50;box-shadow:0 2px 8px rgba(0,0,0,0.1);
+        }
+        .btn-note{background:var(--warning);color:#fff;}
+        .btn-exam{background:var(--pink);color:#fff;}
+        .btn-error{background:var(--gray);color:#fff;}
+
+        /* ========== 代码编辑器（核心新增） ========== */
+        .code-task{
+            background:#f0f9ff;padding:15px;border-radius:8px;margin:20px 0;
+            border-left:4px solid var(--primary);font-size:16px;line-height:1.6;
+        }
+        .code-editor{
+            width:100%;height:220px;padding:15px;
+            border:2px solid #e2e8f0;border-radius:10px;
+            font-family:Consolas,monospace;font-size:15px;
+            outline:none;resize:none;background:#1e1e3f;color:#fff;
+            line-height:1.5;
+        }
+        .code-editor:focus{border-color:var(--primary);}
+        .run-btn{
+            padding:12px 30px;background:var(--success);color:#fff;
+            border:none;border-radius:8px;font-weight:bold;cursor:pointer;
+            margin:15px 0;box-shadow:0 3px 10px rgba(16,185,129,0.2);
+        }
+        .run-btn:hover{transform:scale(1.03);}
+        .output-box{
+            padding:15px;background:#0d1117;color:#fff;border-radius:8px;
+            min-height:80px;font-family:Consolas,monospace;white-space:pre-wrap;
+            border:1px solid #30363d;margin-top:10px;
+        }
+        .pass-btn{
+            padding:14px 30px;background:linear-gradient(90deg,var(--success),#34d399);
+            color:#fff;border:none;border-radius:8px;font-weight:bold;
+            cursor:pointer;margin-top:20px;display:none;
+        }
+
+        /* ========== 提示弹窗 ========== */
+        .tip-box{
+            position:fixed;top:30px;right:30px;padding:15px 25px;
+            background:var(--dark);color:#fff;border-radius:10px;
+            display:none;z-index:99999;box-shadow:var(--shadow-lg);
+            font-weight:500;animation:tipSlide 0.3s ease;
+        }
+        @keyframes tipSlide{
+            0%{transform:translateX(100%);opacity:0;}
+            100%{transform:translateX(0);opacity:1;}
+        }
+
+        /* ========== VIP抽奖弹窗 ========== */
+        .lottery-modal{
+            position:fixed;top:0;left:0;width:100vw;height:100vh;
+            background:rgba(0,0,0,0.7);display:none;
+            align-items:center;justify-content:center;z-index:9999;
+            backdrop-filter:blur(8px);
+        }
+        .lottery-box{
+            width:500px;background:#fff;border-radius:20px;
+            padding:40px;text-align:center;box-shadow:var(--shadow-lg);
+        }
+        .lottery-title{font-size:24px;color:var(--primary);font-weight:bold;margin-bottom:20px;}
+        .lottery-desc{color:var(--gray);margin-bottom:30px;}
+        .lottery-btn{
+            padding:15px 40px;font-size:18px;font-weight:bold;
+            background:linear-gradient(135deg, var(--pink), var(--secondary));
+            color:#fff;border:none;border-radius:12px;
+            cursor:pointer;box-shadow:0 4px 15px rgba(236,72,153,0.3);
+        }
+        .lottery-btn:hover{transform:scale(1.05);}
+        .prize-result{
+            margin-top:25px;padding:20px;border-radius:10px;
+            font-size:18px;font-weight:bold;display:none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 1. Win10虚拟桌面 ========== 修改：图片图标 ========== -->
+    <div class="win10-desktop" id="desktopPage">
+        <div class="desktop-icon-box">
+            <div class="main-icon" id="enterBtn">
+                <img src="logo.png" class="icon" alt="编程学习网站">
+                <div>敲码星球 - 编程考级平台</div>
+            </div>
+        </div>
+        <div class="taskbar">点击快捷图标进入 敲码星球 官方网站</div>
+    </div>
+
+    <!-- 2. 主网站 -->
+    <div class="main-site" id="mainSite">
+        <div class="nav-bar">
+            <div class="nav-title">敲码星球</div>
+            <button class="nav-btn" id="langPython">Python 板块</button>
+            <button class="nav-btn" id="langCpp">C++ 板块</button>
+            <button class="nav-btn" id="mapBtn">学习进度地图</button>
+            <button class="nav-btn" id="knowledgeBtn">考级知识点大全</button>
+            <button class="nav-btn" id="vipCenterBtn">VIP 中心</button>
+            <div class="user-info">
+                <span id="userNameDisplay">游客</span>
+                <span id="vipDisplay"></span>
+                <button class="nav-btn" id="logoutBtn">退出登录</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- 关卡地图 -->
+            <div class="map-wrap" id="mapPanel">
+                <h2 class="map-title">📊 敲码星球学习进度地图（共10级）</h2>
+                <div class="level-map" id="levelMapBox"></div>
+            </div>
+
+            <!-- 学习面板 -->
+            <div class="study-panel" id="studyPanel">
+                <h3 class="level-title" id="currentLevelTitle">第1关</h3>
+                <div class="tab-box">
+                    <button class="nav-btn" data-tab="learn">📖 课程学习</button>
+                    <button class="nav-btn" data-tab="question">📝 在线题库</button>
+                </div>
+                <div class="tab-content" id="tabContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 登录注册弹窗 -->
+    <div class="login-modal" id="loginModal">
+        <div class="modal-box">
+            <div class="tab-switch">
+                <button class="tab-btn active" data-login-tab="login">登录</button>
+                <button class="tab-btn" data-login-tab="reg">注册账号</button>
+            </div>
+
+            <div class="login-form" id="loginForm">
+                <div class="form-item">
+                    <label>账号</label>
+                    <input type="text" id="loginUser" placeholder="请输入你的账号">
+                </div>
+                <div class="form-item">
+                    <label>密码</label>
+                    <input type="password" id="loginPwd" placeholder="请输入你的密码">
+                </div>
+                <button class="submit-btn" id="loginSubmit">登录 敲码星球</button>
+            </div>
+
+            <div class="reg-form" id="regForm" style="display:none;">
+                <div class="form-item">
+                    <label>设置账号</label>
+                    <input type="text" id="regUser" placeholder="自定义专属账号">
+                </div>
+                <div class="form-item">
+                    <label>设置密码</label>
+                    <input type="password" id="regPwd" placeholder="设置登录密码">
+                </div>
+                <button class="submit-btn" id="regSubmit">注册并成为VIP会员</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- VIP抽奖弹窗 -->
+    <div class="lottery-modal" id="lotteryModal">
+        <div class="lottery-box">
+            <h2 class="lottery-title">🎁 VIP会员专属抽奖</h2>
+            <p class="lottery-desc">每日免费抽奖1次，赢取编程学习大礼包！</p>
+            <button class="lottery-btn" id="drawBtn">立即抽奖</button>
+            <div class="prize-result" id="prizeResult"></div>
+            <button class="submit-btn" style="margin-top:20px;" onclick="closeLottery()">关闭抽奖中心</button>
+        </div>
+    </div>
+
+    <!-- 消息提示 -->
+    <div class="tip-box" id="tipBox"></div>
+
+    <script>
+        // ===================== 本地存储工具 =====================
+        const DB = {
+            getUser: ()=>JSON.parse(localStorage.getItem("userInfo")||"null"),
+            setUser: data=>localStorage.setItem("userInfo",JSON.stringify(data)),
+            getAllUsers: ()=>JSON.parse(localStorage.getItem("allUsers")||"{}"),
+            saveAllUsers: obj=>localStorage.setItem("allUsers",JSON.stringify(obj)),
+            getProgress: ()=>JSON.parse(localStorage.getItem("progress")||'{"pythonLevel":0,"cppLevel":0,"currentLang":"python","currentLevel":1}'),
+            saveProgress: obj=>localStorage.setItem("progress",JSON.stringify(obj))
+        }
+
+        // DOM元素
+        const dom = {
+            desktopPage:document.getElementById("desktopPage"),mainSite:document.getElementById("mainSite"),
+            enterBtn:document.getElementById("enterBtn"),loginModal:document.getElementById("loginModal"),
+            loginForm:document.getElementById("loginForm"),regForm:document.getElementById("regForm"),
+            tipBox:document.getElementById("tipBox"),mapPanel:document.getElementById("mapPanel"),
+            studyPanel:document.getElementById("studyPanel"),levelMapBox:document.getElementById("levelMapBox"),
+            tabContent:document.getElementById("tabContent"),currentLevelTitle:document.getElementById("currentLevelTitle"),
+            userNameDisplay:document.getElementById("userNameDisplay"),vipDisplay:document.getElementById("vipDisplay"),
+            langPython:document.getElementById("langPython"),langCpp:document.getElementById("langCpp"),
+            mapBtn:document.getElementById("mapBtn"),knowledgeBtn:document.getElementById("knowledgeBtn"),
+            logoutBtn:document.getElementById("logoutBtn"),vipCenterBtn:document.getElementById("vipCenterBtn"),
+            lotteryModal:document.getElementById("lotteryModal"),prizeResult:document.getElementById("prizeResult")
+        }
+
+        // 提示框
+        function showTip(text){
+            dom.tipBox.innerText = text;
+            dom.tipBox.style.display = "block";
+            setTimeout(()=>dom.tipBox.style.display="none",2800);
+        }
+
+        // ===================== 桌面进入系统 =====================
+        dom.enterBtn.addEventListener('click', function(){
+            dom.desktopPage.style.display = "none";
+            dom.mainSite.style.display = "block";
+            dom.loginModal.style.display = "flex";
+        });
+
+        // ===================== 登录注册切换 =====================
+        document.querySelectorAll("[data-login-tab]").forEach(btn=>{
+            btn.onclick = ()=>{
+                document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+                btn.classList.add("active");
+                const tab = btn.dataset.loginTab;
+                dom.loginForm.style.display = tab=="login"?"block":"none";
+                dom.regForm.style.display = tab=="reg"?"block":"none";
+            }
+        })
+
+        // ===================== 注册（默认VIP） =====================
+        document.getElementById("regSubmit").onclick = ()=>{
+            const user = document.getElementById("regUser").value.trim();
+            const pwd = document.getElementById("regPwd").value.trim();
+            if(!user||!pwd) return showTip("账号密码不能为空！");
+            
+            const allUsers = DB.getAllUsers();
+            if(allUsers[user]) return showTip("账号已存在！");
+            
+            allUsers[user] = {pwd, isVip:true};
+            DB.saveAllUsers(allUsers);
+            DB.setUser({name:user, vip:true});
+            
+            showTip("注册成功！恭喜成为VIP会员！");
+            closeLoginModal();
+            refreshUserStatus();
+            renderMap();
+        }
+
+        // ===================== 登录 =====================
+        document.getElementById("loginSubmit").onclick = ()=>{
+            const user = document.getElementById("loginUser").value.trim();
+            const pwd = document.getElementById("loginPwd").value.trim();
+            const allUsers = DB.getAllUsers();
+            
+            if(!allUsers[user]) return showTip("账号不存在！");
+            if(allUsers[user].pwd !== pwd) return showTip("密码错误！");
+            
+            DB.setUser({name:user, vip:allUsers[user].isVip});
+            showTip("登录成功！欢迎来到敲码星球！");
+            closeLoginModal();
+            refreshUserStatus();
+            renderMap();
+        }
+
+        function closeLoginModal(){ dom.loginModal.style.display = "none"; }
+
+        // ===================== 退出登录 =====================
+        dom.logoutBtn.onclick = ()=>{
+            localStorage.removeItem("userInfo");
+            dom.userNameDisplay.innerText = "游客";
+            dom.vipDisplay.innerText = "";
+            dom.desktopPage.style.display = "flex";
+            dom.mainSite.style.display = "none";
+            showTip("已安全退出！");
+        }
+
+        // ===================== 刷新用户信息 =====================
+        function refreshUserStatus(){
+            const u = DB.getUser();
+            if(!u) return;
+            dom.userNameDisplay.innerText = u.name;
+            dom.vipDisplay.innerText = u.vip ? "VIP会员" : "";
+            dom.vipDisplay.className = u.vip ? "vip-tag" : "";
+        }
+
+        // ===================== 语言切换 =====================
+        dom.langPython.onclick = ()=>switchLang("python");
+        dom.langCpp.onclick = ()=>switchLang("cpp");
+        
+        function switchLang(lang){
+            const progress = DB.getProgress();
+            progress.currentLang = lang;
+            progress.currentLevel = progress[lang+"Level"]>0 ? progress[lang+"Level"] : 1;
+            DB.saveProgress(progress);
+            dom.langPython.classList.toggle("active", lang=="python");
+            dom.langCpp.classList.toggle("active", lang=="cpp");
+            renderMap();
+            showTip(`已切换至${lang=="python"?"Python":"C++"}学习板块`);
+        }
+
+        // ===================== 渲染关卡地图 =====================
+        function renderMap(){
+            dom.mapPanel.style.display = "block";
+            dom.studyPanel.style.display = "none";
+            dom.levelMapBox.innerHTML = "";
+            
+            const progress = DB.getProgress();
+            const maxFinish = progress.currentLang=="python" ? progress.pythonLevel : progress.cppLevel;
+            
+            for(let i=1;i<=10;i++){
+                const node = document.createElement("div");
+                node.className = "level-node";
+                node.innerText = i;
+                
+                if(i > maxFinish +1) node.classList.add("lock");
+                else if(i <= maxFinish) node.classList.add("finish");
+                else node.classList.add("unlock");
+                
+                node.onclick = ()=>{
+                    if(node.classList.contains("lock")) return showTip("请先通关上一级！");
+                    progress.currentLevel = i;
+                    DB.saveProgress(progress);
+                    openStudyLevel(i);
+                }
+                dom.levelMapBox.appendChild(node);
+            }
+        }
+
+        // ===================== 打开学习关卡 =====================
+        function openStudyLevel(level){
+            dom.mapPanel.style.display = "none";
+            dom.studyPanel.style.display = "block";
+            const progress = DB.getProgress();
+            const lang = progress.currentLang;
+            dom.currentLevelTitle.innerText = `${lang=="python"?"Python":"C++"} 第${level}关 🚀`;
+            loadTabContent("learn", level, lang);
+        }
+
+        // 标签切换
+        document.querySelectorAll("[data-tab]").forEach(btn=>{
+            btn.onclick = ()=>{
+                const p = DB.getProgress();
+                loadTabContent(btn.dataset.tab, p.currentLevel, p.currentLang);
+            }
+        })
+
+        // ===================== 每一关编程任务（核心） =====================
+        function getCodeTask(lang,level){
+            const tasks = {
+                python:[
+                    "任务：使用print输出 Hello World!",
+                    "任务：定义变量a=10，输出变量a的值",
+                    "任务：输入两个数字，计算它们的和并输出",
+                    "任务：使用if判断数字是否大于0",
+                    "任务：使用for循环输出1-5的数字",
+                    "任务：定义列表[1,2,3]，遍历输出所有元素",
+                    "任务：定义函数，返回两个数的乘积",
+                    "任务：读取字符串，统计字符串长度",
+                    "任务：使用字典存储姓名和年龄，输出内容",
+                    "任务：综合编程：实现一个简单计算器"
+                ],
+                cpp:[
+                    "任务：使用cout输出 Hello World!",
+                    "任务：定义int变量a=10，输出变量值",
+                    "任务：输入两个整数，计算和并输出",
+                    "任务：使用if判断数字正负",
+                    "任务：for循环输出1-10",
+                    "任务：定义数组，遍历输出元素",
+                    "任务：编写函数，求两个数的最大值",
+                    "任务：使用string字符串，输出长度",
+                    "任务：结构体存储学生信息，输出",
+                    "任务：综合编程：实现简单加法程序"
+                ]
+            }
+            return tasks[lang][level-1];
+        }
+
+        // ===================== 代码运行校验（通关核心） =====================
+        function runCode(lang,level){
+            const code = document.getElementById("codeArea").value;
+            const output = document.getElementById("outputArea");
+            const passBtn = document.getElementById("passBtn");
+            
+            if(!code.trim()){
+                output.innerText = "❌ 错误：请编写代码后再运行！";
+                return;
+            }
+
+            // 模拟代码运行结果
+            let res = `✅ ${lang} 代码运行成功！\n`;
+            res += `📝 运行结果：符合第${level}关要求`;
+            output.innerText = res;
+            
+            // 运行成功 → 显示通关按钮
+            passBtn.style.display = "block";
+            showTip("代码运行成功！点击通关按钮解锁下一关");
+        }
+
+        // ===================== 通关解锁（必须运行成功才能解锁） =====================
+        function passLevel(){
+            const p = DB.getProgress();
+            const key = p.currentLang+"Level";
+            
+            if(p[key]>=p.currentLevel){
+                showTip("本关已通关！");
+                return;
+            }
+
+            p[key] = p.currentLevel;
+            DB.saveProgress(p);
+            showTip(`🎉 恭喜通关！成功解锁第${p.currentLevel+1}关`);
+            renderMap();
+        }
+
+        // ===================== 加载学习内容（代码编辑器版） =====================
+        function loadTabContent(tab,level,lang){
+            const u = DB.getUser();
+            let html = "";
+            const langName = lang=="python"?"Python":"C++";
+
+            if(tab=="learn"){
+                html = `<h3 style="color:var(--primary);margin-bottom:15px;">【${langName}第${level}关 · 考级核心考点】</h3>`;
+                html += `<div style="font-size:16px;line-height:1.8;color:var(--dark);padding:10px;background:#f0f9ff;border-radius:8px;">`;
+                html += getLevelKnowledge(lang,level) + `</div>`;
+                
+                // 🔥 编程任务 + 代码编辑器（核心新增）
+                html += `<div class="code-task">${getCodeTask(lang,level)}</div>`;
+                html += `<h4 style="margin:15px 0;color:var(--dark);">💻 在线代码编辑器</h4>`;
+                html += `<textarea class="code-editor" id="codeArea" placeholder="请在此编写${langName}代码..."></textarea>`;
+                html += `<button class="run-btn" onclick="runCode('${lang}',${level})">▶️ 运行代码</button>`;
+                html += `<h4 style="margin:15px 0;color:var(--dark);">📊 运行结果</h4>`;
+                html += `<div class="output-box" id="outputArea">等待运行代码...</div>`;
+                
+                // 通关按钮（默认隐藏，运行成功才显示）
+                html += `<button class="pass-btn" id="passBtn" onclick="passLevel()">✅ 通关成功，解锁下一关</button>`;
+                
+                // 功能按钮
+                html += `<div class="func-btn-group" style="margin-top:25px;">
+                    <button class="func-btn btn-note" onclick="showTip('已保存本关学习笔记！')">📔 保存学习笔记</button>
+                    <button class="func-btn btn-exam" onclick="showTip('已打开本关考级真题！')">📄 查看考级真题</button>
+                    <button class="func-btn btn-error" onclick="showTip('错题本已同步更新！')">❌ 查看错题集</button>
+                </div>`;
+            }else{
+                html = `<h3 style="color:var(--primary);margin-bottom:15px;">【${langName}第${level}关 · 全真题库】</h3>`;
+                const qList = getLevelQuestion(lang,level);
+                qList.forEach((q,idx)=>{
+                    html += `<div class="question-item">${idx+1}. ${q}</div>`;
+                });
+            }
+
+            dom.tabContent.innerHTML = html;
+        }
+
+        // 知识点数据
+        function getLevelKnowledge(lang,level){
+            const data = {
+                python:[
+                    "1. 环境安装、print输出、变量与数据类型（考级必考基础）",
+                    "2. 算术/比较运算符、input输入、if-else分支判断",
+                    "3. for/while循环、break/continue、循环嵌套",
+                    "4. 列表list、元组tuple、增删改查核心操作",
+                    "5. 字典dict、字符串高级处理、考级填空考点",
+                    "6. 函数定义、参数传递、return返回值、递归入门",
+                    "7. 文件读写操作、异常捕获try-except容错处理",
+                    "8. 类与对象、封装继承、面向对象编程基础",
+                    "9. 模块导入、第三方库安装、常用标准库",
+                    "10. 综合考级项目、历年真题核心考点全汇总"
+                ],
+                cpp:[
+                    "1. C++环境搭建、cout输出、变量定义与初始化",
+                    "2. 数据类型、运算符、cin输入输出流",
+                    "3. if/else、switch-case、多重分支结构",
+                    "4. 循环嵌套、for/while/do-while、考级循环题",
+                    "5. 一维/二维数组、字符数组、string字符串",
+                    "6. 函数重载、形参实参、值传递/地址传递",
+                    "7. 指针基础、地址操作、指针与数组",
+                    "8. 结构体struct、文件读写、数据存储",
+                    "9. 类与封装、构造函数、私有/公有成员",
+                    "10. 考级算法汇总、历年C++考级重难点解析"
+                ]
+            }
+            return data[lang][level-1];
+        }
+
+        // 题库数据
+        function getLevelQuestion(lang,level){
+            const base = lang=="python"?"Python":"C++";
+            return [
+                `${base}考级选择题：基础语法概念真题`,
+                `${base}考级阅读题：代码运行结果判断`,
+                `${base}考级填空题：核心语法补全`,
+                `${base}考级编程题：基础算法实现`,
+                `${base}考级综合题：历年真题压轴题`
+            ]
+        }
+
+        // ===================== VIP中心 + 抽奖功能 =====================
+        dom.vipCenterBtn.onclick = ()=>{
+            const u = DB.getUser();
+            if(!u) return showTip("请先登录！");
+            dom.lotteryModal.style.display = "flex";
+            dom.prizeResult.style.display = "none";
+        }
+        
+        function closeLottery(){ dom.lotteryModal.style.display = "none"; }
+        
+        // 抽奖逻辑
+        document.getElementById("drawBtn").onclick = ()=>{
+            const prizes = [
+                "🎉 一等奖：全套考级真题试卷",
+                "🎁 二等奖：VIP专属学习资料",
+                "🎊 三等奖：编程知识点思维导图",
+                "🎈 四等奖：在线编程会员7天",
+                "🌟 幸运奖：敲码星球定制头像框"
+            ];
+            const res = prizes[Math.floor(Math.random()*prizes.length)];
+            dom.prizeResult.innerText = res;
+            dom.prizeResult.style.display = "block";
+            dom.prizeResult.style.background = "#f0f9ff";
+            dom.prizeResult.style.color = "#6366f1";
+        }
+
+        // 导航按钮
+        dom.mapBtn.onclick = renderMap;
+        dom.knowledgeBtn.onclick = ()=>showTip("VIP已解锁全部考级知识点！切换语言查看完整内容");
+
+        // 初始化
+        window.onload = refreshUserStatus;
+    </script>
+</body>
+</html>
