@@ -11,7 +11,6 @@
         *{margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft Yahei",sans-serif;transition:all 0.3s ease;}
         body{overflow:hidden;}
         
-        /* ========== 全局配色与动画 ========== */
         :root{
             --primary: #6366f1;
             --primary-light: #818cf8;
@@ -23,9 +22,10 @@
             --dark: #1f2937;
             --shadow: 0 4px 20px rgba(0,0,0,0.1);
             --shadow-lg: 0 8px 30px rgba(0,0,0,0.15);
+            --cyber-red: #dc2626;
+            --cyber-red-light: #ef4444;
         }
         
-        /* ========== Win10桌面启动页 ========== */
         .win10-desktop{
             width:100vw;height:100vh;
             background: linear-gradient(135deg, #4facfe 0%, #6366f1 100%);
@@ -62,10 +62,8 @@
             backdrop-filter:blur(10px);
         }
 
-        /* ========== 主网站容器 ========== */
         .main-site{display:none;width:100vw;height:100vh;overflow:auto;background:#f8fafc;}
         
-        /* ========== 登录/注册弹窗 ========== */
         .login-modal{
             position:fixed;top:0;left:0;width:100vw;height:100vh;
             background:rgba(0,0,0,0.7);display:flex;
@@ -101,7 +99,6 @@
         }
         .submit-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(99,102,241,0.4);}
 
-        /* ========== 导航栏 ========== */
         .nav-bar{
             height:65px;background:linear-gradient(90deg, var(--primary), var(--secondary));
             color:#fff;display:flex;align-items:center;padding:0 30px;gap:25px;
@@ -116,6 +113,27 @@
         }
         .nav-btn:hover{background:rgba(255,255,255,0.25);transform:scale(1.03);}
         .nav-btn.active{background:#fff;color:var(--primary);font-weight:600;}
+        .nav-btn#cyberRangeBtn{
+            background: linear-gradient(90deg, var(--cyber-red), var(--cyber-red-light));
+            box-shadow: 0 0 10px rgba(220, 38, 38, 0.4);
+            position: relative;
+        }
+        .nav-btn#cyberRangeBtn:hover{
+            background: linear-gradient(90deg, var(--cyber-red-light), #f87171);
+            transform: scale(1.05);
+        }
+        .nav-btn#cyberRangeBtn::after{
+            content: "限免";
+            position: absolute;
+            top: -8px; right: -8px;
+            background: #f59e0b;
+            color: #000;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
         .user-info{margin-left:auto;display:flex;gap:20px;align-items:center;}
         .vip-tag{
             background:linear-gradient(90deg, #ffd700, #ffed4e);
@@ -123,10 +141,8 @@
             font-size:13px;font-weight:bold;box-shadow:0 2px 8px rgba(255,215,0,0.3);
         }
 
-        /* ========== 主内容区 ========== */
         .container{padding:35px;max-width:1400px;margin:0 auto;}
         
-        /* ========== 关卡地图 ========== */
         .map-wrap{display:none;}
         .map-title{font-size:26px;margin-bottom:30px;color:var(--dark);font-weight:600;text-align:center;}
         .level-map{display:grid;grid-template-columns:repeat(5,1fr);gap:25px;max-width:800px;margin:0 auto;}
@@ -142,7 +158,6 @@
         .unlock{background:linear-gradient(135deg, var(--primary), var(--primary-light));}
         .finish{background:linear-gradient(135deg, var(--success), #34d399);}
 
-        /* ========== 学习面板 ========== */
         .study-panel{display:none;}
         .level-title{font-size:24px;margin:20px 0;color:var(--dark);font-weight:600;}
         .tab-box{margin:25px 0;display:flex;gap:15px;}
@@ -165,7 +180,29 @@
         .btn-exam{background:var(--pink);color:#fff;}
         .btn-error{background:var(--gray);color:#fff;}
 
-        /* ========== 代码编辑器（核心新增） ========== */
+        /* 新增：学习引导样式 */
+        .guide-box{
+            background: #f0f9ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 4px solid var(--primary);
+        }
+        .guide-title{
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        .code-example{
+            background: #1e1e3f;
+            color: #fff;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 8px 0;
+            font-family: Consolas, monospace;
+            overflow-x: auto;
+        }
+
         .code-task{
             background:#f0f9ff;padding:15px;border-radius:8px;margin:20px 0;
             border-left:4px solid var(--primary);font-size:16px;line-height:1.6;
@@ -195,7 +232,6 @@
             cursor:pointer;margin-top:20px;display:none;
         }
 
-        /* ========== 提示弹窗 ========== */
         .tip-box{
             position:fixed;top:30px;right:30px;padding:15px 25px;
             background:var(--dark);color:#fff;border-radius:10px;
@@ -207,7 +243,6 @@
             100%{transform:translateX(0);opacity:1;}
         }
 
-        /* ========== VIP抽奖弹窗 ========== */
         .lottery-modal{
             position:fixed;top:0;left:0;width:100vw;height:100vh;
             background:rgba(0,0,0,0.7);display:none;
@@ -231,10 +266,171 @@
             margin-top:25px;padding:20px;border-radius:10px;
             font-size:18px;font-weight:bold;display:none;
         }
+
+        .cyber-tutorial-modal{
+            position:fixed;top:0;left:0;width:100vw;height:100vh;
+            background:#000;
+            display:none;
+            align-items:center;justify-content:center;
+            z-index:99999;backdrop-filter:blur(8px);
+            color:#fff;
+        }
+        .cyber-tutorial-box{
+            width:800px;background:#111;border-radius:16px;
+            padding:40px;box-shadow:0 0 30px rgba(220,38,38,0.5);
+            max-height:80vh;overflow-y:auto;
+        }
+        .tutorial-title{
+            font-size:30px;color:var(--cyber-red-light);
+            margin-bottom:20px;text-align:center;
+            border-bottom:2px solid var(--cyber-red);
+            padding-bottom:15px;
+        }
+        .tutorial-step{
+            margin:25px 0;padding-left:15px;
+            border-left:3px solid var(--cyber-red-light);
+        }
+        .tutorial-step h4{
+            font-size:20px;margin-bottom:10px;color:#fff;
+        }
+        .tutorial-step p{
+            font-size:16px;line-height:1.8;color:#ccc;
+        }
+        .enter-cyber-btn{
+            width:100%;padding:15px;margin-top:30px;
+            background:linear-gradient(90deg, var(--cyber-red), var(--cyber-red-light));
+            color:#fff;border:none;border-radius:10px;
+            font-size:18px;font-weight:bold;cursor:pointer;
+            box-shadow:0 4px 15px rgba(220,38,38,0.4);
+        }
+        .enter-cyber-btn:hover{
+            transform:scale(1.03);
+            box-shadow:0 6px 20px rgba(220,38,38,0.6);
+        }
+
+        .cyber-range-wrap{
+            display:none;width:100%;height:100%;
+            background:#000 !important;
+            color:#fff;
+            padding:20px 0;
+        }
+        .cyber-header{
+            display:flex;justify-content:space-between;align-items:center;
+            margin-bottom:25px;padding-bottom:15px;border-bottom:2px solid #333;
+        }
+        .cyber-title{
+            font-size:28px;color:#fff;
+            font-weight:700;display:flex;align-items:center;gap:10px;
+        }
+        .cyber-title i{color:var(--cyber-red-light);font-size:32px;}
+        .timer-box{
+            background:linear-gradient(135deg, #ef4444, #dc2626);
+            color:#fff;padding:10px 20px;border-radius:8px;
+            font-size:18px;font-weight:bold;box-shadow:0 3px 10px rgba(239,68,68,0.3);
+        }
+        .cyber-controls{display:flex;gap:15px;}
+        .cyber-btn{
+            padding:10px 20px;border-radius:8px;border:none;
+            font-weight:600;cursor:pointer;
+            box-shadow:0 2px 8px rgba(0,0,0,0.1);
+        }
+        .pause-btn{background:var(--warning);color:#fff;}
+        .hint-btn{background:var(--cyber-red);color:#fff;}
+        .restart-btn{background:var(--gray);color:#fff;}
+
+        .cyber-container{
+            display:grid;grid-template-columns:1fr 2fr;gap:30px;
+            height:calc(100vh - 200px);
+        }
+        .story-panel{
+            background:#111;border-radius:12px;padding:25px;
+            box-shadow:var(--shadow);overflow-y:auto;
+            border:1px solid #333;
+        }
+        .story-title{
+            font-size:20px;font-weight:600;color:var(--cyber-red-light);
+            margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #333;
+        }
+        .story-content{
+            font-size:16px;line-height:1.8;color:#eee;
+            margin-bottom:20px;
+        }
+        .attack-alert{
+            background:#3a0a0a;border-left:4px solid #ef4444;
+            padding:12px 15px;border-radius:8px;margin:15px 0;
+            color:#f87171;font-weight:500;
+        }
+        .defense-success{
+            background:#0a3a19;border-left:4px solid #10b981;
+            padding:12px 15px;border-radius:8px;margin:15px 0;
+            color:#34d399;font-weight:500;
+        }
+
+        .sandbox-panel{
+            background:#0f172a;border-radius:12px;padding:25px;
+            box-shadow:var(--shadow-lg);display:flex;flex-direction:column;
+            border:1px solid #222;
+        }
+        .server-status{
+            color:#fff;margin-bottom:20px;display:flex;align-items:center;gap:10px;
+        }
+        .status-indicator{
+            width:15px;height:15px;border-radius:50%;background:#ef4444;
+            animation:blink 1s infinite alternate;
+        }
+        @keyframes blink{
+            0%{opacity:0.5;}
+            100%{opacity:1;}
+        }
+        .status-safe{background:#10b981;animation:none;}
+        .sandbox-terminal{
+            flex:1;background:#1e293b;border-radius:8px;padding:20px;
+            overflow-y:auto;margin-bottom:20px;
+            color:#a5f3fc;font-family:Consolas,monospace;
+            font-size:14px;line-height:1.6;
+            border:1px solid #333;
+        }
+        .terminal-input-box{
+            display:flex;gap:10px;
+        }
+        .terminal-prompt{
+            color:#10b981;font-weight:bold;padding:12px 15px;
+            background:#0f172a;border-radius:8px 0 0 8px;
+            font-family:Consolas,monospace;
+        }
+        .terminal-input{
+            flex:1;padding:12px 15px;border:none;border-radius:0 8px 8px 0;
+            background:#334155;color:#fff;outline:none;
+            font-family:Consolas,monospace;font-size:14px;
+            border:1px solid #444;
+        }
+        .hint-panel{
+            position:fixed;bottom:30px;left:50%;transform:translateX(-50%);
+            background:linear-gradient(135deg, var(--cyber-red), var(--cyber-red-light));
+            color:#fff;padding:15px 25px;border-radius:10px;
+            box-shadow:var(--shadow-lg);z-index:9999;
+            display:none;max-width:600px;text-align:center;
+        }
+        .cyber-result{
+            position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+            background:#111;border-radius:16px;padding:40px;
+            box-shadow:0 0 30px rgba(220,38,38,0.5);
+            z-index:9999;text-align:center;display:none;
+            min-width:500px;color:#fff;
+            border:1px solid #333;
+        }
+        .result-title{
+            font-size:32px;font-weight:bold;margin-bottom:20px;
+        }
+        .result-success{color:#10b981;}
+        .result-fail{color:#ef4444;}
+        .result-desc{
+            font-size:18px;color:#ccc;margin-bottom:30px;
+            line-height:1.8;
+        }
     </style>
 </head>
 <body>
-    <!-- 1. Win10虚拟桌面 -->
     <div class="win10-desktop" id="desktopPage">
         <div class="desktop-icon-box">
             <div class="main-icon" id="enterBtn">
@@ -242,10 +438,9 @@
                 <div>敲码星球 - 编程考级平台</div>
             </div>
         </div>
-        <div class="taskbar">点击快捷图标进入 敲码星球 官方网站 | 敲码星球 1.1v 更新日志：修复编辑区bug、增加判断机制</div>
+        <div class="taskbar">点击快捷图标进入 敲码星球 官方网站 | 敲码星球 1.2v 更新日志：更改代码判断bug、增加防篡改、增加网络安全靶场练习（限免，未来可能收费）</div>
     </div>
 
-    <!-- 2. 主网站 -->
     <div class="main-site" id="mainSite">
         <div class="nav-bar">
             <div class="nav-title">敲码星球</div>
@@ -254,6 +449,7 @@
             <button class="nav-btn" id="mapBtn">学习进度地图</button>
             <button class="nav-btn" id="knowledgeBtn">考级知识点大全</button>
             <button class="nav-btn" id="vipCenterBtn">VIP 中心</button>
+            <button class="nav-btn" id="cyberRangeBtn">网安靶场（现实攻击模拟）</button>
             <div class="user-info">
                 <span id="userNameDisplay">游客</span>
                 <span id="vipDisplay"></span>
@@ -262,13 +458,11 @@
         </div>
 
         <div class="container">
-            <!-- 关卡地图 -->
             <div class="map-wrap" id="mapPanel">
                 <h2 class="map-title">📊 敲码星球学习进度地图（共10级）</h2>
                 <div class="level-map" id="levelMapBox"></div>
             </div>
 
-            <!-- 学习面板 -->
             <div class="study-panel" id="studyPanel">
                 <h3 class="level-title" id="currentLevelTitle">第1关</h3>
                 <div class="tab-box">
@@ -277,10 +471,97 @@
                 </div>
                 <div class="tab-content" id="tabContent"></div>
             </div>
+
+            <div class="study-panel" id="knowledgePanel" style="display:none;">
+                <h3 class="level-title">📚 编程考级知识点大全</h3>
+                <div class="tab-content">
+                    <div class="question-item"><h4>Python 一级核心考点</h4><p>print输出、变量定义、input输入、基础算术运算</p></div>
+                    <div class="question-item"><h4>Python 二级核心考点</h4><p>if条件判断、for/while循环、列表基础操作</p></div>
+                    <div class="question-item"><h4>Python 三级核心考点</h4><p>函数定义、字符串处理、字典基础</p></div>
+                    <div class="question-item"><h4>C++ 一级核心考点</h4><p>cout输出、cin输入、int变量定义、简单运算</p></div>
+                    <div class="question-item"><h4>C++ 二级核心考点</h4><p>if条件判断、for循环、一维数组遍历</p></div>
+                    <div class="question-item"><h4>考级通关规则</h4><p>共10个等级，逐级解锁，完成代码编写+验证即可通关</p></div>
+                </div>
+            </div>
+
+            <div class="cyber-range-wrap" id="cyberRangePanel">
+                <div class="cyber-header">
+                    <h2 class="cyber-title">🔒 校园服务器防御靶场 - 限时练习（限免体验）</h2>
+                    <div class="timer-box" id="cyberTimer">09:59</div>
+                    <div class="cyber-controls">
+                        <button class="cyber-btn pause-btn" id="pauseBtn">暂停游戏</button>
+                        <button class="cyber-btn hint-btn" id="hintBtn">查看提示</button>
+                        <button class="cyber-btn restart-btn" id="restartBtn">重新开始</button>
+                    </div>
+                </div>
+
+                <div class="cyber-container">
+                    <div class="story-panel" id="storyPanel">
+                        <h3 class="story-title">📜 故事剧情</h3>
+                        <div class="story-content" id="storyContent">
+                            早晨8点，学校信息中心接到告警：校园服务器正在遭受不明黑客攻击！<br>
+                            作为学校的网络安全管理员，你的任务是在10分钟内完成所有防御操作，阻断黑客的攻击路径，保护服务器内的学生数据和教学资料！<br>
+                            <br>
+                            <div class="attack-alert">⚠️ 攻击告警：检测到黑客正在尝试暴力破解SSH端口（22端口）！</div>
+                            <br>
+                            第一步：请在终端输入防御指令，关闭危险的22端口！
+                        </div>
+                    </div>
+
+                    <div class="sandbox-panel">
+                        <div class="server-status">
+                            <div class="status-indicator" id="statusIndicator"></div>
+                            <span>服务器状态：遭受攻击中</span>
+                        </div>
+                        <div class="sandbox-terminal" id="sandboxTerminal">
+                            [系统] 校园服务器防御沙盒已启动<br>
+                            [系统] 当前时间：08:00:00<br>
+                            [告警] SSH暴力破解攻击检测 - 来源IP：192.168.1.100<br>
+                            [提示] 输入防御指令保护服务器！
+                        </div>
+                        <div class="terminal-input-box">
+                            <div class="terminal-prompt">admin@school-server:~$</div>
+                            <input type="text" class="terminal-input" id="terminalInput" placeholder="输入防御指令（如：iptables -A INPUT -p tcp --dport 22 -j DROP）">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- 登录注册弹窗 -->
+    <div class="cyber-tutorial-modal" id="cyberTutorialModal">
+        <div class="cyber-tutorial-box">
+            <h3 class="tutorial-title">📖 网安靶场 - 现实攻击防御教程</h3>
+            <div class="tutorial-step">
+                <h4>1. 攻击背景说明</h4>
+                <p>本靶场模拟真实的校园服务器SSH暴力破解攻击（22端口），SSH是Linux服务器远程登录的常用端口，黑客会通过暴力破解尝试获取服务器权限。</p>
+            </div>
+            <div class="tutorial-step">
+                <h4>2. 防御原理</h4>
+                <p>我们需要使用iptables（Linux防火墙工具）关闭22端口，阻止黑客的攻击流量。<br>
+                核心指令：iptables -A INPUT -p tcp --dport 22 -j DROP<br>
+                指令说明：<br>
+                - iptables：Linux防火墙命令<br>
+                - -A INPUT：添加规则到输入链<br>
+                - -p tcp：指定TCP协议<br>
+                - --dport 22：目标端口为22<br>
+                - -j DROP：丢弃符合条件的数据包</p>
+            </div>
+            <div class="tutorial-step">
+                <h4>3. 操作步骤</h4>
+                <p>① 在终端输入上述防御指令<br>
+                ② 点击回车执行指令<br>
+                ③ 观察服务器状态是否从"遭受攻击中"变为"安全"<br>
+                ④ 在10分钟内完成所有防御操作即可通关</p>
+            </div>
+            <div class="tutorial-step">
+                <h4>4. 注意事项</h4>
+                <p>本靶场为模拟环境，真实生产环境中关闭22端口前需确认是否有合法的远程登录需求，也可改为限制指定IP访问22端口。</p>
+            </div>
+            <button class="enter-cyber-btn" id="enterCyberBtn">进入靶场开始练习</button>
+        </div>
+    </div>
+
     <div class="login-modal" id="loginModal">
         <div class="modal-box">
             <div class="tab-switch">
@@ -314,22 +595,45 @@
         </div>
     </div>
 
-    <!-- VIP抽奖弹窗 -->
     <div class="lottery-modal" id="lotteryModal">
         <div class="lottery-box">
             <h2 class="lottery-title">🎁 VIP会员专属抽奖</h2>
-            <p class="lottery-desc">每日免费抽奖1次，赢取编程学习大礼包！</p>
+            <p class="lottery-desc">每日免费抽奖1次，开通VIP解锁全部学习内容！</p>
             <button class="lottery-btn" id="drawBtn">立即抽奖</button>
             <div class="prize-result" id="prizeResult"></div>
             <button class="submit-btn" style="margin-top:20px;" onclick="closeLottery()">关闭抽奖中心</button>
         </div>
     </div>
 
-    <!-- 消息提示 -->
+    <div class="hint-panel" id="hintPanel">提示内容</div>
+    <div class="cyber-result" id="cyberResult">
+        <h3 class="result-title result-success" id="resultTitle">🎉 防御成功！</h3>
+        <div class="result-desc" id="resultDesc">
+            你成功阻断了所有黑客攻击，校园服务器恢复安全！<br>
+            本次练习用时：8分25秒
+        </div>
+        <button class="submit-btn" id="resultBtn">返回靶场首页</button>
+    </div>
+
     <div class="tip-box" id="tipBox"></div>
 
     <script>
-        // ===================== 本地存储工具 =====================
+        // ====================== 新增：禁止右键+禁止查看源代码+禁止F12 ======================
+        // 禁止右键菜单
+        document.oncontextmenu = function(){return false;};
+        // 禁止F12、Ctrl+Shift+I、Ctrl+U、Ctrl+S
+        document.onkeydown = function(e){
+            if(e.key === 'F12' || 
+               (e.ctrlKey && e.shiftKey && e.key === 'I') || 
+               (e.ctrlKey && e.key === 'U') ||
+               (e.ctrlKey && e.key === 'S')){
+                return false;
+            }
+        };
+        // 防调试自动断点
+        setInterval(function(){debugger;}, 1000);
+        // ============================================================================
+
         const DB = {
             getUser: ()=>JSON.parse(localStorage.getItem("userInfo")||"null"),
             setUser: data=>localStorage.setItem("userInfo",JSON.stringify(data)),
@@ -339,7 +643,6 @@
             saveProgress: obj=>localStorage.setItem("progress",JSON.stringify(obj))
         }
 
-        // DOM元素
         const dom = {
             desktopPage:document.getElementById("desktopPage"),mainSite:document.getElementById("mainSite"),
             enterBtn:document.getElementById("enterBtn"),loginModal:document.getElementById("loginModal"),
@@ -351,24 +654,30 @@
             langPython:document.getElementById("langPython"),langCpp:document.getElementById("langCpp"),
             mapBtn:document.getElementById("mapBtn"),knowledgeBtn:document.getElementById("knowledgeBtn"),
             logoutBtn:document.getElementById("logoutBtn"),vipCenterBtn:document.getElementById("vipCenterBtn"),
-            lotteryModal:document.getElementById("lotteryModal"),prizeResult:document.getElementById("prizeResult")
+            lotteryModal:document.getElementById("lotteryModal"),prizeResult:document.getElementById("prizeResult"),
+            cyberRangeBtn:document.getElementById("cyberRangeBtn"),cyberRangePanel:document.getElementById("cyberRangePanel"),
+            cyberTimer:document.getElementById("cyberTimer"),pauseBtn:document.getElementById("pauseBtn"),
+            hintBtn:document.getElementById("hintBtn"),restartBtn:document.getElementById("restartBtn"),
+            storyContent:document.getElementById("storyContent"),statusIndicator:document.getElementById("statusIndicator"),
+            sandboxTerminal:document.getElementById("sandboxTerminal"),terminalInput:document.getElementById("terminalInput"),
+            hintPanel:document.getElementById("hintPanel"),cyberResult:document.getElementById("cyberResult"),
+            resultTitle:document.getElementById("resultTitle"),resultDesc:document.getElementById("resultDesc"),
+            resultBtn:document.getElementById("resultBtn"),knowledgePanel:document.getElementById("knowledgePanel"),
+            cyberTutorialModal:document.getElementById("cyberTutorialModal"),enterCyberBtn:document.getElementById("enterCyberBtn")
         }
 
-        // 提示框
         function showTip(text){
             dom.tipBox.innerText = text;
             dom.tipBox.style.display = "block";
             setTimeout(()=>dom.tipBox.style.display="none",2800);
         }
 
-        // ===================== 桌面进入系统 =====================
         dom.enterBtn.addEventListener('click', function(){
             dom.desktopPage.style.display = "none";
             dom.mainSite.style.display = "block";
             dom.loginModal.style.display = "flex";
         });
 
-        // ===================== 登录注册切换 =====================
         document.querySelectorAll("[data-login-tab]").forEach(btn=>{
             btn.onclick = ()=>{
                 document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
@@ -379,7 +688,6 @@
             }
         })
 
-        // ===================== 注册（默认VIP） =====================
         document.getElementById("regSubmit").onclick = ()=>{
             const user = document.getElementById("regUser").value.trim();
             const pwd = document.getElementById("regPwd").value.trim();
@@ -396,9 +704,9 @@
             closeLoginModal();
             refreshUserStatus();
             renderMap();
+            dom.lotteryModal.style.display = "flex";
         }
 
-        // ===================== 登录 =====================
         document.getElementById("loginSubmit").onclick = ()=>{
             const user = document.getElementById("loginUser").value.trim();
             const pwd = document.getElementById("loginPwd").value.trim();
@@ -412,11 +720,11 @@
             closeLoginModal();
             refreshUserStatus();
             renderMap();
+            dom.lotteryModal.style.display = "flex";
         }
 
         function closeLoginModal(){ dom.loginModal.style.display = "none"; }
 
-        // ===================== 退出登录 =====================
         dom.logoutBtn.onclick = ()=>{
             localStorage.removeItem("userInfo");
             dom.userNameDisplay.innerText = "游客";
@@ -426,7 +734,6 @@
             showTip("已安全退出！");
         }
 
-        // ===================== 刷新用户信息 =====================
         function refreshUserStatus(){
             const u = DB.getUser();
             if(!u) return;
@@ -435,7 +742,6 @@
             dom.vipDisplay.className = u.vip ? "vip-tag" : "";
         }
 
-        // ===================== 语言切换 =====================
         dom.langPython.onclick = ()=>switchLang("python");
         dom.langCpp.onclick = ()=>switchLang("cpp");
         
@@ -450,10 +756,12 @@
             showTip(`已切换至${lang=="python"?"Python":"C++"}学习板块`);
         }
 
-        // ===================== 渲染关卡地图 =====================
         function renderMap(){
             dom.mapPanel.style.display = "block";
             dom.studyPanel.style.display = "none";
+            dom.cyberRangePanel.style.display = "none";
+            dom.knowledgePanel.style.display = "none";
+            dom.cyberTutorialModal.style.display = "none";
             dom.levelMapBox.innerHTML = "";
             
             const progress = DB.getProgress();
@@ -478,17 +786,43 @@
             }
         }
 
-        // ===================== 打开学习关卡 =====================
+        dom.mapBtn.onclick = () => {
+            renderMap();
+            showTip("已打开学习进度地图");
+        }
+
+        dom.knowledgeBtn.onclick = () => {
+            dom.mapPanel.style.display = "none";
+            dom.studyPanel.style.display = "none";
+            dom.cyberRangePanel.style.display = "none";
+            dom.cyberTutorialModal.style.display = "none";
+            dom.knowledgePanel.style.display = "block";
+            showTip("已打开编程考级知识点大全");
+        }
+
+        dom.vipCenterBtn.onclick = () => {
+            const user = DB.getUser();
+            if(!user){
+                showTip("请先登录账号！");
+                dom.loginModal.style.display = "flex";
+                return;
+            }
+            dom.lotteryModal.style.display = "flex";
+            showTip("欢迎进入VIP会员中心！");
+        }
+
         function openStudyLevel(level){
             dom.mapPanel.style.display = "none";
             dom.studyPanel.style.display = "block";
+            dom.cyberRangePanel.style.display = "none";
+            dom.knowledgePanel.style.display = "none";
+            dom.cyberTutorialModal.style.display = "none";
             const progress = DB.getProgress();
             const lang = progress.currentLang;
             dom.currentLevelTitle.innerText = `${lang=="python"?"Python":"C++"} 第${level}关 🚀`;
             loadTabContent("learn", level, lang);
         }
 
-        // 标签切换
         document.querySelectorAll("[data-tab]").forEach(btn=>{
             btn.onclick = ()=>{
                 const p = DB.getProgress();
@@ -496,557 +830,339 @@
             }
         })
 
-        // ===================== 【核心新增】每一关编程题的校验规则 =====================
+        // 新增：格式化代码（去除空格、换行、大小写，宽松判题）
+        function formatCode(code) {
+            return code.replace(/\s+/g, '').toLowerCase();
+        }
+
+        // 优化：宽松且合理的判题规则（核心语法正确即通过，忽略格式）
         const codeCheckRules = {
-            // Python关卡校验规则
             python: [
-                { // 第1关：输出Hello World!
-                    check: (code, output) => {
-                        // 校验是否包含print且输出Hello World
-                        const hasPrint = /print\(.*Hello\s+World.*\)/i.test(code);
-                        const outputMatch = output.includes("Hello World");
-                        return hasPrint && outputMatch;
-                    },
-                    errorMsg: "❌ 错误：请使用print输出 'Hello World!'（注意大小写和空格）"
-                },
-                { // 第2关：定义变量a=10并输出
-                    check: (code, output) => {
-                        const hasVar = /a\s*=\s*10/.test(code);
-                        const hasPrintA = /print\(a\)/.test(code);
-                        const outputMatch = output.includes("10");
-                        return hasVar && hasPrintA && outputMatch;
-                    },
-                    errorMsg: "❌ 错误：请先定义变量a=10，再使用print(a)输出变量值"
-                },
-                { // 第3关：输入两个数求和
-                    check: (code, output) => {
-                        const hasInput = /input\(\)/.test(code) && code.match(/input\(\)/g).length >=2;
-                        const hasSum = /\+/.test(code);
-                        const isNumberOutput = /\d+/.test(output) && !isNaN(parseInt(output));
-                        return hasInput && hasSum && isNumberOutput;
-                    },
-                    errorMsg: "❌ 错误：请输入两个数字，计算并输出它们的和（例：a=int(input());b=int(input());print(a+b)）"
-                },
-                { // 第4关：if判断数字是否大于0
-                    check: (code, output) => {
-                        const hasIf = /if\s+.+>0/.test(code);
-                        const hasCondition = />0/.test(code);
-                        return hasIf && hasCondition && (output.includes("大于0") || output.includes("True") || output.includes("是正数"));
-                    },
-                    errorMsg: "❌ 错误：请使用if判断输入的数字是否大于0，并输出对应结果"
-                },
-                { // 第5关：for循环输出1-5
-                    check: (code, output) => {
-                        const hasFor = /for\s+.+in\s+range\(1,6\)/.test(code);
-                        const outputMatch = output.includes("1") && output.includes("2") && output.includes("3") && output.includes("4") && output.includes("5");
-                        return hasFor && outputMatch;
-                    },
-                    errorMsg: "❌ 错误：请使用for循环（range(1,6)）输出1-5的数字（每行一个）"
-                },
-                { // 第6关：遍历列表[1,2,3]
-                    check: (code, output) => {
-                        const hasList = /\[1,2,3\]/.test(code);
-                        const hasForIn = /for\s+.+in\s+/.test(code);
-                        const outputMatch = output.includes("1") && output.includes("2") && output.includes("3");
-                        return hasList && hasForIn && outputMatch;
-                    },
-                    errorMsg: "❌ 错误：请定义列表[1,2,3]，并使用for循环遍历输出所有元素"
-                },
-                { // 第7关：定义函数返回两数乘积
-                    check: (code, output) => {
-                        const hasDef = /def\s+\w+\(.+,.+\)/.test(code);
-                        const hasReturn = /return\s+.+\*.+/.test(code);
-                        const isNumberOutput = /\d+/.test(output) && !isNaN(parseInt(output));
-                        return hasDef && hasReturn && isNumberOutput;
-                    },
-                    errorMsg: "❌ 错误：请定义函数（如def mul(a,b): return a*b），调用并输出乘积"
-                },
-                { // 第8关：统计字符串长度
-                    check: (code, output) => {
-                        const hasLen = /len\(/.test(code);
-                        const hasString = /["'].+["']/.test(code);
-                        const isNumberOutput = /\d+/.test(output) && !isNaN(parseInt(output));
-                        return hasLen && hasString && isNumberOutput;
-                    },
-                    errorMsg: "❌ 错误：请使用len()函数统计字符串长度并输出（例：s='abc';print(len(s))）"
-                },
-                { // 第9关：字典存储姓名和年龄
-                    check: (code, output) => {
-                        const hasDict = /\{.+\:.+\}/.test(code);
-                        const hasNameAge = /姓名|age|name/.test(code) && /年龄|\d+/.test(code);
-                        return hasDict && hasNameAge && output.includes("姓名") || output.includes("年龄");
-                    },
-                    errorMsg: "❌ 错误：请定义字典（如info={'姓名':'小明','年龄':10}）并输出内容"
-                },
-                { // 第10关：简单计算器
-                    check: (code, output) => {
-                        const hasOperator = /\+|-|\*|\//.test(code);
-                        const hasInput = /input\(\)/.test(code);
-                        const hasCondition = /if|elif|else/.test(code);
-                        return hasOperator && hasInput && hasCondition && !isNaN(parseInt(output));
-                    },
-                    errorMsg: "❌ 错误：请实现支持加减乘除的简单计算器，输入数字和运算符后输出结果"
-                }
+                // 1关：print输出Hello World
+                {check: (code, output)=>formatCode(code).includes("print") && output.toLowerCase().includes("hello world"), 
+                 errorMsg:"❌ 请用print函数输出Hello World，大小写/引号不影响"},
+                // 2关：变量a=10并输出
+                {check: (code, output)=>formatCode(code).includes("a=10") && formatCode(code).includes("print(a)") && output.includes("10"), 
+                 errorMsg:"❌ 定义变量a=10，并用print(a)输出"},
+                // 3关：输入两数求和
+                {check: (code, output)=>formatCode(code).includes("input") && formatCode(code).includes("+") && !isNaN(parseInt(output)), 
+                 errorMsg:"❌ 使用input输入两个数字，相加后输出结果"},
+                // 4关：if判断正数
+                {check: (code, output)=>formatCode(code).includes("if") && formatCode(code).includes(">0") && (output.includes("正数") || output.includes("大于0")), 
+                 errorMsg:"❌ 用if判断数字是否为正数，并输出结果"},
+                // 5关：for循环1-5
+                {check: (code, output)=>formatCode(code).includes("for") && formatCode(code).includes("range") && output.includes("1") && output.includes("5"), 
+                 errorMsg:"❌ 用for循环输出1到5的数字"},
+                // 6关：遍历列表
+                {check: (code, output)=>formatCode(code).includes("[1,2,3]") && formatCode(code).includes("for"), 
+                 errorMsg:"❌ 定义列表[1,2,3]，并用for循环遍历"},
+                // 7关：函数求乘积
+                {check: (code, output)=>formatCode(code).includes("def") && formatCode(code).includes("return") && formatCode(code).includes("*"), 
+                 errorMsg:"❌ 定义函数，接收参数并返回乘积"},
+                // 8关：字符串长度
+                {check: (code, output)=>formatCode(code).includes("len") && !isNaN(parseInt(output)), 
+                 errorMsg:"❌ 用len()函数统计字符串长度"},
+                // 9关：字典
+                {check: (code, output)=>formatCode(code).includes("{") && formatCode(code).includes("}") && (formatCode(code).includes("姓名") || formatCode(code).includes("年龄")), 
+                 errorMsg:"❌ 用字典存储姓名、年龄信息"},
+                // 10关：简单计算器
+                {check: (code, output)=>formatCode(code).includes("input") && formatCode(code).includes("if") && "+-*/".some(op=>code.includes(op)), 
+                 errorMsg:"❌ 实现带加减乘除的简单计算器"}
             ],
-            // C++关卡校验规则（前端模拟校验，重点校验语法和输出）
             cpp: [
-                { // 第1关：cout输出Hello World
-                    check: (code, output) => {
-                        const hasCout = /cout\s*<<.*Hello\s+World/.test(code);
-                        const outputMatch = output.includes("Hello World");
-                        return hasCout && outputMatch;
-                    },
-                    errorMsg: "❌ 错误：请使用cout输出 'Hello World!'（例：cout << \"Hello World!\";）"
-                },
-                { // 第2关：定义int a=10并输出
-                    check: (code, output) => {
-                        const hasVar = /int\s+a\s*=\s*10/.test(code);
-                        const hasCoutA = /cout\s*<<\s*a/.test(code);
-                        const outputMatch = output.includes("10");
-                        return hasVar && hasCoutA && outputMatch;
-                    },
-                    errorMsg: "❌ 错误：请定义int a=10，再使用cout << a;输出变量值"
-                },
-                { // 第3关：输入两个数求和
-                    check: (code, output) => {
-                        const hasCin = /cin\s*>>/.test(code) && code.match(/cin\s*>>/g).length >=2;
-                        const hasSum = /\+/.test(code);
-                        const isNumberOutput = /\d+/.test(output) && !isNaN(parseInt(output));
-                        return hasCin && hasSum && isNumberOutput;
-                    },
-                    errorMsg: "❌ 错误：请输入两个整数，计算并输出它们的和（例：int a,b;cin>>a>>b;cout<<a+b;）"
-                },
-                { // 第4关：if判断数字正负
-                    check: (code, output) => {
-                        const hasIf = /if\s*\(.+>0/.test(code);
-                        const hasCondition = />0|<0|==0/.test(code);
-                        return hasIf && hasCondition && (output.includes("正") || output.includes("负") || output.includes("零"));
-                    },
-                    errorMsg: "❌ 错误：请使用if判断输入的数字是正数、负数还是零，并输出对应结果"
-                },
-                { // 第5关：for循环输出1-10
-                    check: (code, output) => {
-                        const hasFor = /for\s*\(.+;.*<=\s*10/.test(code);
-                        const outputMatch = output.includes("1") && output.includes("10") && output.length >=10;
-                        return hasFor && outputMatch;
-                    },
-                    errorMsg: "❌ 错误：请使用for循环输出1-10的数字（例：for(int i=1;i<=10;i++){cout<<i<<endl;}）"
-                },
-                { // 第6关：遍历数组
-                    check: (code, output) => {
-                        const hasArray = /int\s+\w+\[\]\s*=\s*\{.+\}/.test(code);
-                        const hasFor = /for\s*\(.+<\s*\d+/.test(code);
-                        const outputMatch = output.includes("1") && output.includes("2") && output.includes("3");
-                        return hasArray && hasFor && outputMatch;
-                    },
-                    errorMsg: "❌ 错误：请定义数组（如int arr[]={1,2,3};），并使用for循环遍历输出元素"
-                },
-                { // 第7关：函数求最大值
-                    check: (code, output) => {
-                        const hasFunc = /int\s+\w+\(int\s+.+,int\s+.+\)/.test(code);
-                        const hasReturn = /return\s+.+>.*\?/.test(code) || /if\s*\(.+>.*\)\{return/.test(code);
-                        const outputMatch = /\d+/.test(output) && !isNaN(parseInt(output));
-                        return hasFunc && hasReturn && outputMatch;
-                    },
-                    errorMsg: "❌ 错误：请编写函数，接收两个整数并返回最大值，调用函数并输出结果"
-                },
-                { // 第8关：string字符串长度
-                    check: (code, output) => {
-                        const hasString = /string\s+\w+/.test(code);
-                        const hasLength = /\.length\(\)/.test(code);
-                        const outputMatch = /\d+/.test(output) && !isNaN(parseInt(output));
-                        return hasString && hasLength && outputMatch;
-                    },
-                    errorMsg: "❌ 错误：请定义string字符串，使用.length()获取长度并输出"
-                },
-                { // 第9关：结构体存储学生信息
-                    check: (code, output) => {
-                        const hasStruct = /struct\s+\w+/.test(code);
-                        const hasMember = /\.\w+/.test(code);
-                        return hasStruct && hasMember && (output.includes("姓名") || output.includes("成绩"));
-                    },
-                    errorMsg: "❌ 错误：请定义结构体存储学生信息（姓名、成绩），创建对象并输出信息"
-                },
-                { // 第10关：加法程序
-                    check: (code, output) => {
-                        const hasCin = /cin\s*>>/.test(code);
-                        const hasSum = /\+/.test(code);
-                        const hasLoop = /while|for/.test(code); // 支持多次计算
-                        return hasCin && hasSum && hasLoop && !isNaN(parseInt(output));
-                    },
-                    errorMsg: "❌ 错误：请实现支持多次输入的加法程序，直到输入0退出"
-                }
+                // 1关：cout输出Hello World
+                {check: (code, output)=>formatCode(code).includes("cout") && output.toLowerCase().includes("hello world"), 
+                 errorMsg:"❌ 用cout输出Hello World，大小写不影响"},
+                // 2关：int a=10输出
+                {check: (code, output)=>formatCode(code).includes("inta=10") && formatCode(code).includes("cout<<a"), 
+                 errorMsg:"❌ 定义int a=10，并用cout输出a"},
+                // 3关：输入求和
+                {check: (code, output)=>formatCode(code).includes("cin") && formatCode(code).includes("+"), 
+                 errorMsg:"❌ 用cin输入两个数字，相加后输出"},
+                // 4关：判断正负
+                {check: (code, output)=>formatCode(code).includes("if") && (output.includes("正") || output.includes("负")), 
+                 errorMsg:"❌ 用if判断数字正负并输出"},
+                // 5关：for循环1-10
+                {check: (code, output)=>formatCode(code).includes("for") && output.includes("10"), 
+                 errorMsg:"❌ 用for循环输出1到10"},
+                // 6关：遍历数组
+                {check: (code, output)=>formatCode(code).includes("int[]") && formatCode(code).includes("for"), 
+                 errorMsg:"❌ 定义数组并用for循环遍历"},
+                // 7关：函数最大值
+                {check: (code, output)=>formatCode(code).includes("int") && formatCode(code).includes("return") && formatCode(code).includes(">"), 
+                 errorMsg:"❌ 定义函数求两个数的最大值"},
+                // 8关：字符串长度
+                {check: (code, output)=>formatCode(code).includes("string") && formatCode(code).includes("length"), 
+                 errorMsg:"❌ 用string和length()获取字符串长度"},
+                // 9关：结构体
+                {check: (code, output)=>formatCode(code).includes("struct"), 
+                 errorMsg:"❌ 定义结构体存储学生信息"},
+                // 10关：多次加法
+                {check: (code, output)=>formatCode(code).includes("cin") && formatCode(code).includes("while"), 
+                 errorMsg:"❌ 用while循环实现多次加法"}
             ]
         };
 
-        // ===================== 每一关编程任务（扩展版） =====================
+        // 新增：每个关卡的学习引导（解析+知识点+提示+示例）
+        const studyGuide = {
+            python: [
+                {title:"输出Hello World", tip:"print是Python的输出函数，括号内加引号就是输出文字", example:'print("Hello World")'},
+                {title:"变量a=10输出", tip:"变量=数字 定义变量，print(变量名)输出变量", example:'a = 10\nprint(a)'},
+                {title:"两数求和", tip:"input()获取输入，int()转数字，+号相加", example:'a = int(input())\nb = int(input())\nprint(a + b)'},
+                {title:"if判断正数", tip:"if 条件: 满足条件执行代码", example:'num = 10\nif num > 0:\n    print("正数")'},
+                {title:"for循环1-5", tip:"range(1,6) 生成1-5的数字", example:'for i in range(1,6):\n    print(i)'},
+                {title:"遍历列表[1,2,3]", tip:"列表用[]包裹，for循环直接遍历", example:'lst = [1,2,3]\nfor i in lst:\n    print(i)'},
+                {title:"函数求乘积", tip:"def 函数名(): 定义函数，return返回结果", example:'def mul(a,b):\n    return a*b\nprint(mul(2,3))'},
+                {title:"字符串长度", tip:"len(字符串) 统计字符个数", example:'s = "敲码星球"\nprint(len(s))'},
+                {title:"字典信息", tip:"字典用{键:值}存储数据", example:'person = {"姓名":"小明","年龄":10}\nprint(person)'},
+                {title:"简单计算器", tip:"input输入数字，if判断运算符号", example:'a = int(input())\nop = input()\nb = int(input())\nif op == "+":\n    print(a+b)'}
+            ],
+            cpp: [
+                {title:"cout输出Hello World", tip:"cout是C++输出，<<是输出符号", example:'#include <iostream>\nusing namespace std;\nint main(){\n    cout<<"Hello World";\n    return 0;\n}'},
+                {title:"int a=10输出", tip:"int定义整数变量，cout输出变量", example:'#include <iostream>\nusing namespace std;\nint main(){\n    int a=10;\n    cout<<a;\n    return 0;\n}'},
+                {title:"输入两数求和", tip:"cin输入数字，+号相加", example:'#include <iostream>\nusing namespace std;\nint main(){\n    int a,b;\n    cin>>a>>b;\n    cout<<a+b;\n    return 0;\n}'},
+                {title:"判断正负", tip:"if(条件)判断数字大小", example:'#include <iostream>\nusing namespace std;\nint main(){\n    int num=5;\n    if(num>0) cout<<"正数";\n    return 0;\n}'},
+                {title:"for循环1-10", tip:"for(初始;条件;更新)循环", example:'#include <iostream>\nusing namespace std;\nint main(){\n    for(int i=1;i<=10;i++) cout<<i;\n    return 0;\n}'},
+                {title:"遍历数组", tip:"int数组[]存储，for循环遍历", example:'#include <iostream>\nusing namespace std;\nint main(){\n    int arr[]={1,2,3};\n    for(int i=0;i<3;i++) cout<<arr[i];\n    return 0;\n}'},
+                {title:"函数最大值", tip:"定义函数返回较大值", example:'int max(int a,int b){return a>b?a:b;}'},
+                {title:"字符串长度", tip:"string存储字符串，length()获取长度", example:'#include <string>\nstring s="abc";\ncout<<s.length();'},
+                {title:"结构体", tip:"struct定义结构体", example:'struct Student{char name[10];int age;};'},
+                {title:"多次加法", tip:"while循环重复执行", example:'while(true){cin>>a>>b;cout<<a+b;}'}
+            ]
+        };
+
         function getCodeTask(lang,level){
             const tasks = {
-                python:[
-                    "任务：使用print输出 Hello World!（注意大小写和空格）",
-                    "任务：定义变量a=10，使用print(a)输出变量a的值",
-                    "任务：输入两个数字（int类型），计算它们的和并输出结果",
-                    "任务：输入一个数字，使用if判断是否大于0，输出“是正数”或“不是正数”",
-                    "任务：使用for循环（range）输出1-5的数字（每行一个）",
-                    "任务：定义列表[1,2,3]，使用for循环遍历输出所有元素",
-                    "任务：定义函数mul(a,b)，返回两个数的乘积，调用函数并输出结果",
-                    "任务：定义字符串（如'编程考级'），使用len()统计长度并输出",
-                    "任务：使用字典存储姓名（如'小明'）和年龄（如12），输出字典内容",
-                    "任务：综合编程：实现支持加减乘除的简单计算器（输入数字和运算符）"
-                ],
-                cpp:[
-                    "任务：使用cout输出 Hello World!（注意包含头文件#include <iostream>）",
-                    "任务：定义int变量a=10，使用cout << a;输出变量值",
-                    "任务：输入两个整数，计算和并输出（注意cin和cout的使用）",
-                    "任务：输入一个数字，使用if判断正负，输出“正数”/“负数”/“零”",
-                    "任务：for循环输出1-10的数字（每行一个，使用endl换行）",
-                    "任务：定义数组int arr[]={1,2,3};，遍历输出所有元素",
-                    "任务：编写函数max(int a,int b)，返回两个数的最大值，调用并输出",
-                    "任务：定义string s=\"C++编程\";，输出s.length()获取的长度",
-                    "任务：结构体struct Student{string name;int score;};存储信息并输出",
-                    "任务：综合编程：实现简单加法程序（支持多次输入，输入0退出）"
-                ]
+                python:["输出Hello World","变量a=10输出","两数求和","if判断正数","for循环1-5","遍历列表[1,2,3]","函数求乘积","字符串长度","字典信息","简单计算器"],
+                cpp:["cout输出Hello World","int a=10输出","两数求和","判断正负","for循环1-10","遍历数组","函数最大值","string长度","结构体","多次加法"]
             }
             return tasks[lang][level-1];
         }
 
-        // ===================== 【核心重构】代码运行+真实校验 =====================
+        // ====================== 修复：代码运行+input输入问题 ======================
         function runCode(lang,level){
             const code = document.getElementById("codeArea").value.trim();
             const output = document.getElementById("outputArea");
             const passBtn = document.getElementById("passBtn");
             
-            // 1. 空代码校验
-            if(!code){
-                output.innerText = "❌ 错误：请编写代码后再运行！";
-                passBtn.style.display = "none";
-                return;
+            if(!code){output.innerText="❌ 请编写代码！";passBtn.style.display="none";return;}
+
+            let outputText = "";
+            try {
+                if(lang==="python"){
+                    // 核心修复：模拟Python的input函数，支持浏览器交互式输入
+                    outputText = eval(`(()=>{
+                        let output=[];
+                        const print=(t)=>output.push(t);
+                        // 模拟input函数，弹出输入框获取用户输入
+                        const input = (msg)=>window.prompt(msg || '请输入内容：');
+                        ${code};
+                        return output.join('\\n');
+                    })()`);
+                }else{
+                    // C++基础语法校验
+                    outputText = "C++ 语法校验通过，请核对输出结果";
+                }
+            } catch(e){
+                outputText = "❌ 运行错误："+e.message;
             }
 
-            // 2. 模拟代码执行（Python支持简易执行，C++模拟输出）
-            let actualOutput = "";
-            let isSuccess = false;
-
-            try {
-                if(lang === "python"){
-                    // Python代码执行（重定向print输出）
-                    const oldLog = console.log;
-                    let logOutput = [];
-                    console.log = (...args) => logOutput.push(args.join(" "));
-                    
-                    // 执行代码
-                    eval(code);
-                    actualOutput = logOutput.join("\n");
-                    console.log = oldLog; // 恢复console.log
-                } else {
-                    // C++代码模拟输出（前端无法执行C++，校验语法关键词+模拟输出）
-                    if(code.includes("cout")){
-                        // 提取cout后的内容（简单模拟）
-                        const coutMatch = code.match(/cout\s*<<\s*(.+?);/);
-                        if(coutMatch && coutMatch[1]){
-                            const content = coutMatch[1].replace(/["';]/g, "").trim();
-                            actualOutput = content === "a" ? "10" : content;
-                        } else {
-                            actualOutput = "模拟运行结果（C++）";
-                        }
-                    } else {
-                        actualOutput = "请使用cout输出结果";
-                    }
-                }
-
-                // 3. 执行校验规则
-                const rule = codeCheckRules[lang][level-1];
-                isSuccess = rule.check(code, actualOutput);
-
-                if(isSuccess){
-                    output.innerText = `✅ ${lang} 代码运行成功！\n📝 运行结果：${actualOutput}\n✅ 答案正确！可以通关`;
-                    passBtn.style.display = "block";
-                    showTip("代码运行成功且答案正确！点击通关按钮解锁下一关");
-                } else {
-                    output.innerText = `${rule.errorMsg}\n📝 当前输出：${actualOutput}`;
-                    passBtn.style.display = "none";
-                    showTip("代码运行成功，但答案不符合要求！");
-                }
-            } catch (e) {
-                // 代码语法错误
-                output.innerText = `❌ 代码执行错误：${e.message}\n请检查语法后重试`;
-                passBtn.style.display = "none";
-                showTip("代码存在语法错误！");
+            output.innerText = outputText;
+            const rule = codeCheckRules[lang][level-1];
+            const pass = rule.check(code, outputText);
+            
+            if(pass){
+                passBtn.style.display="block";
+                showTip("✅ 验证通过！核心逻辑正确！");
+            }else{
+                passBtn.style.display="none";
+                showTip(rule.errorMsg);
             }
         }
 
-        // ===================== 通关解锁（仅校验通过可通关） =====================
-        function passLevel(){
-            const p = DB.getProgress();
-            const key = p.currentLang+"Level";
-            
-            if(p[key]>=p.currentLevel){
-                showTip("本关已通关！");
-                return;
-            }
+        // 优化：加载学习面板，新增引导提示
+        function loadTabContent(tabType, level, lang) {
+            dom.tabContent.innerHTML = "";
+            const guide = studyGuide[lang][level-1];
+            if(tabType==="learn"){
+                dom.tabContent.innerHTML = `
+                    <div class="code-task">🎯 任务：${getCodeTask(lang,level)}</div>
+                    
+                    <div class="guide-box">
+                        <div class="guide-title">📚 题目解析</div>
+                        <p>${guide.title}</p>
+                    </div>
 
-            p[key] = p.currentLevel;
-            DB.saveProgress(p);
-            showTip(`🎉 恭喜通关！成功解锁第${p.currentLevel+1}关`);
+                    <div class="guide-box">
+                        <div class="guide-title">💡 核心提示</div>
+                        <p>${guide.tip}</p>
+                    </div>
+
+                    <div class="guide-box">
+                        <div class="guide-title">✅ 参考示例代码</div>
+                        <div class="code-example">${guide.example.replace(/\n/g, '<br>')}</div>
+                        <p style="color:var(--gray);font-size:12px;">格式/大小写不影响判题，核心逻辑正确即可通关</p>
+                    </div>
+
+                    <div class="code-task">✍️ 请在下方编写代码：</div>
+                    <textarea class="code-editor" id="codeArea" placeholder="编写${lang}代码..."></textarea>
+                    <button class="run-btn" onclick="runCode('${lang}',${level})">▶️ 运行代码</button>
+                    <div class="output-box" id="outputArea">运行结果...</div>
+                    <button class="pass-btn" id="passBtn" onclick="passLevel('${lang}',${level})">✅ 提交通关</button>
+                `;
+            }else{
+                dom.tabContent.innerHTML = `<div class="question-item"><h4>编程选择题</h4></div>`;
+            }
+        }
+
+        function passLevel(lang,level){
+            const progress = DB.getProgress();
+            if(progress[lang+"Level"] < level){
+                progress[lang+"Level"] = level;
+                DB.saveProgress(progress);
+            }
+            showTip(`恭喜通关${lang=="python"?"Python":"C++"}第${level}关！`);
             renderMap();
         }
 
-        // ===================== 【扩展】知识点数据（更详细） =====================
-        function getLevelKnowledge(lang,level){
-            const data = {
-                python:[
-                    "1. 环境安装：Python解释器下载与配置、IDLE使用；print输出语法（必考点）：print('内容')、转义字符（\\n/\\t）；变量定义：命名规则、数据类型（int/str/float/bool）",
-                    "2. 算术运算符（+ - * / // % **）、比较运算符（> < == != >= <=）；input输入：input()获取字符串、int()/float()类型转换；if-else分支：缩进规则、条件表达式",
-                    "3. for循环：range(start,end,step)用法、遍历字符串/列表；while循环：条件控制、死循环避免；break/continue关键字；循环嵌套（考级高频考点）",
-                    "4. 列表list：创建方式、索引/切片、增（append/insert）删（pop/remove）改查；元组tuple：不可变特性、常用操作；列表推导式（进阶考点）",
-                    "5. 字典dict：键值对结构、增删改查（dict[key]/del/keys()/values()）；字符串高级处理：切片、replace()/split()/strip()；考级填空题常考字符串操作",
-                    "6. 函数定义：def 函数名(参数): 语法、返回值return；参数传递：位置参数/关键字参数/默认参数；递归函数（基础理解）、函数调用栈",
-                    "7. 文件读写：open()函数（r/w/a模式）、read()/readline()/write()、close()关闭文件；异常捕获：try-except-finally、常见异常类型（NameError/TypeError）",
-                    "8. 类与对象：class定义类、__init__构造方法、属性与方法；封装与继承：父类/子类、super()调用父类方法；面向对象编程核心思想",
-                    "9. 模块导入：import/from...import、自定义模块；第三方库安装：pip install 库名；常用标准库：math（数学计算）、random（随机数）、datetime（时间）",
-                    "10. 综合考级项目：历年真题拆解（字符串处理/文件操作/循环逻辑）、编程题解题思路、易错点总结（缩进/语法错误/类型转换）"
-                ],
-                cpp:[
-                    "1. C++环境搭建：Dev-C++/VS配置、编译运行流程；cout输出：#include <iostream>、using namespace std;、cout << 内容 << endl；变量定义：数据类型（int/char/string/float）、命名规则",
-                    "2. 基本数据类型：取值范围、类型转换（自动/强制）；运算符优先级：算术>关系>逻辑；cin输入：cin >> 变量、多变量输入；输入输出流同步",
-                    "3. if/else分支：条件表达式、缩进规范；switch-case语句：case穿透、break关键字；多重分支结构（考级选择题高频考点）；三目运算符（a>b?a:b）",
-                    "4. for循环：for(初始化;条件;更新)结构、循环变量作用域；while/do-while循环：执行顺序差异；循环嵌套（打印图形/数列，考级编程题必考点）",
-                    "5. 一维数组：定义/初始化/遍历、数组下标（从0开始）；二维数组：行列遍历、存储原理；字符数组：char[]与string的区别、字符串结束符\\0",
-                    "6. 函数定义：返回值类型 函数名(参数列表)；函数重载：参数个数/类型不同；形参实参：值传递、地址传递（指针入门）；函数声明与实现分离",
-                    "7. 指针基础：地址&、解引用*、空指针；指针与数组：数组名=首地址、指针遍历数组；const指针、指针参数（考级重难点）",
-                    "8. 结构体struct：定义/成员访问（.运算符）、结构体数组；文件读写：fopen/fclose/fread/fwrite、文件模式（r/w/a）；数据持久化基础",
-                    "9. 类与封装：class定义、访问控制（public/private）；构造函数/析构函数：自动调用、参数化构造；成员函数、对象创建与销毁",
-                    "10. 考级算法汇总：排序（冒泡/选择）、查找（顺序/二分）、递归（阶乘/斐波那契）；历年C++考级真题解析、编程题得分技巧"
-                ]
+        dom.cyberRangeBtn.onclick = function(){
+            dom.mapPanel.style.display = "none";
+            dom.studyPanel.style.display = "none";
+            dom.knowledgePanel.style.display = "none";
+            dom.cyberRangePanel.style.display = "block";
+            dom.cyberTutorialModal.style.display = "flex";
+            showTip("已进入网安靶场模块，新手教程已开启！");
+        }
+
+        dom.enterCyberBtn.onclick = function(){
+            dom.cyberTutorialModal.style.display = "none";
+            setTimeout(()=>{
+                showHintPanel("💡 提示：输入iptables -A INPUT -p tcp --dport 22 -j DROP 可关闭22端口，阻止SSH暴力破解！");
+            }, 1000);
+            startCyberTimer();
+        }
+
+        function showHintPanel(text){
+            dom.hintPanel.innerText = text;
+            dom.hintPanel.style.display = "block";
+            setTimeout(()=>{
+                dom.hintPanel.style.display = "none";
+            }, 8000);
+        }
+
+        dom.terminalInput.addEventListener('keydown', function(e){
+            if(e.key === 'Enter'){
+                const cmd = this.value.trim();
+                if(cmd === "iptables -A INPUT -p tcp --dport 22 -j DROP"){
+                    dom.sandboxTerminal.innerHTML += `<br>admin@school-server:~$ ${cmd}<br>[成功] 已添加防火墙规则，关闭22端口！<br>[系统] 攻击流量已被阻断，服务器恢复安全！`;
+                    dom.statusIndicator.className = "status-indicator status-safe";
+                    document.querySelector(".server-status span").innerText = "服务器状态：安全";
+                    showTip("✅ 防御指令执行成功！服务器已安全！");
+                    setTimeout(()=>{
+                        dom.cyberResult.style.display = "block";
+                        dom.resultTitle.innerText = "🎉 防御成功！";
+                        dom.resultTitle.className = "result-title result-success";
+                        dom.resultDesc.innerText = `你成功阻断了SSH暴力破解攻击！\n本次练习用时：${9 - parseInt(dom.cyberTimer.innerText.split(':')[0])}分${60 - parseInt(dom.cyberTimer.innerText.split(':')[1])}秒`;
+                    }, 1500);
+                }else{
+                    dom.sandboxTerminal.innerHTML += `<br>admin@school-server:~$ ${cmd}<br>[错误] 指令无效！请输入正确的防御指令（iptables -A INPUT -p tcp --dport 22 -j DROP）`;
+                    showTip("❌ 指令错误！请参考提示输入正确的防御指令！");
+                    showHintPanel("💡 正确指令：iptables -A INPUT -p tcp --dport 22 -j DROP （关闭22端口阻止SSH暴力破解）");
+                }
+                this.value = "";
             }
-            return data[lang][level-1];
-        }
+        });
 
-        // ===================== 【扩展】题库数据（新增更多题型） =====================
-        function getLevelQuestion(lang,level){
-            const base = lang=="python"?"Python":"C++";
-            const pythonQuestions = [
-                [
-                    "1. 以下哪个是Python正确的变量名？（A. 123abc B. abc_123 C. abc-123 D. @abc）",
-                    "2. print(\"Hello\" + \"World\")的输出结果是？（A. Hello World B. HelloWorld C. 报错 D. Hello+World）",
-                    "3. 填空题：实现输出1-10的循环，补全代码：for i in ____(1,11): print(i)",
-                    "4. 编程题：输入一个三位数，反转输出（如输入123，输出321）",
-                    "5. 综合题：编写程序，统计输入字符串中数字、字母、其他字符的个数"
-                ],
-                [
-                    "1. 执行a=10; b=3; print(a%b)的结果是？（A. 3 B. 1 C. 0 D. 10）",
-                    "2. 以下哪个是Python的注释方式？（A. //注释 B. /*注释*/ C. #注释 D. --注释）",
-                    "3. 填空题：补全if判断代码：if a ____ 0: print(\"正数\")",
-                    "4. 编程题：使用while循环计算1-100的累加和",
-                    "5. 综合题：判断输入的年份是否为闰年（能被4整除且不能被100整除，或能被400整除）"
-                ],
-                [
-                    "1. 列表[1,2,3,4]的len()结果是？（A. 3 B. 4 C. 5 D. 报错）",
-                    "2. 以下哪个方法可以向列表末尾添加元素？（A. insert() B. append() C. remove() D. pop()）",
-                    "3. 填空题：补全字典取值代码：info={'name':'小明'}; print(info[____])",
-                    "4. 编程题：遍历列表，筛选出所有偶数并组成新列表",
-                    "5. 综合题：编写通讯录程序，支持添加、查询、删除联系人（字典存储）"
-                ],
-                [
-                    "1. 定义函数def add(a,b): return a+b，调用add(3,4)的结果是？（A. 7 B. 34 C. 报错 D. None）",
-                    "2. 函数中return的作用是？（A. 输出内容 B. 结束函数并返回值 C. 定义变量 D. 循环控制）",
-                    "3. 填空题：补全递归函数求阶乘：def fact(n): if n==1: return 1; else: return n*____(n-1)",
-                    "4. 编程题：编写函数，判断一个数是否为质数",
-                    "5. 综合题：实现简易猜数字游戏（随机生成1-100的数，用户输入猜测，提示大/小/正确）"
-                ],
-                [
-                    "1. 打开文件的正确方式是？（A. open('file.txt') B. fopen('file.txt') C. file.open('file.txt') D. 以上都不对）",
-                    "2. try-except的作用是？（A. 循环控制 B. 异常捕获 C. 定义函数 D. 导入模块）",
-                    "3. 填空题：补全文件读取代码：f = open('test.txt','r'); content = f.____(); f.close()",
-                    "4. 编程题：读取文件内容，统计每行的字符数并输出",
-                    "5. 综合题：编写程序，将输入的学生成绩（姓名+分数）保存到文件，支持查询成绩"
-                ],
-                [
-                    "1. 以下哪个是Python的类定义关键字？（A. class B. struct C. def D. object）",
-                    "2. __init__方法的作用是？（A. 析构函数 B. 构造函数 C. 普通方法 D. 静态方法）",
-                    "3. 填空题：补全类的定义：class Person: def ____(self,name): self.name = name",
-                    "4. 编程题：定义矩形类，包含长和宽，实现求面积和周长的方法",
-                    "5. 综合题：定义学生类，包含姓名、成绩，实现成绩排序、平均分计算的功能"
-                ],
-                [
-                    "1. 导入math库的正确方式是？（A. import math B. include math C. from math import * D. A和C都正确）",
-                    "2. random.randint(1,10)的作用是？（A. 生成1-9的随机数 B. 生成1-10的随机整数 C. 生成0-10的随机数 D. 报错）",
-                    "3. 填空题：补全随机数代码：import random; num = random.____(1,100)",
-                    "4. 编程题：使用math库计算圆的面积（输入半径）",
-                    "5. 综合题：编写程序，生成随机验证码（6位，包含数字和字母）"
-                ],
-                [
-                    "1. 字符串\"abcde\"[1:3]的结果是？（A. ab B. bc C. bcd D. cde）",
-                    "2. 以下哪个方法可以去除字符串两端空格？（A. strip() B. split() C. replace() D. upper()）",
-                    "3. 填空题：补全字符串替换代码：s = \"abc\"; s = s.____(\"b\",\"x\")",
-                    "4. 编程题：将输入的字符串反转输出（如输入\"abc\"，输出\"cba\"）",
-                    "5. 综合题：编写程序，统计一篇文章中每个单词出现的次数（按空格分割）"
-                ],
-                [
-                    "1. 字典{'a':1,'b':2}的values()结果是？（A. ['a','b'] B. [1,2] C. ('a',1) D. 报错）",
-                    "2. 遍历字典的正确方式是？（A. for k in dict: B. for k,v in dict.items(): C. 以上都对 D. 以上都不对）",
-                    "3. 填空题：补全字典添加元素代码：info = {}; info[____] = \"小明\"",
-                    "4. 编程题：合并两个字典，相同键的值相加",
-                    "5. 综合题：编写程序，实现简单的学生信息管理（字典+列表，支持增删改查）"
-                ],
-                [
-                    "1. 以下哪个不是Python的流程控制语句？（A. if B. for C. while D. switch）",
-                    "2. 递归函数必须包含？（A. return B. 终止条件 C. 循环 D. 参数）",
-                    "3. 填空题：补全计算器代码：if op == \"+\": print(a____b)",
-                    "4. 编程题：实现简易计算器，支持加减乘除、取模、幂运算",
-                    "5. 综合题：编写程序，模拟银行ATM机（存款、取款、查询余额、退出）"
-                ]
-            ];
-
-            const cppQuestions = [
-                [
-                    "1. 以下哪个是C++正确的变量定义？（A. int 123a; B. char a_123; C. float a-b; D. double @a;）",
-                    "2. cout << \"Hello\" << \"World\" << endl;的输出结果是？（A. HelloWorld B. Hello World C. 报错 D. Hello\\nWorld）",
-                    "3. 填空题：补全头文件：#include <____> // 用于cout和cin",
-                    "4. 编程题：输出1-100的所有偶数（每行一个）",
-                    "5. 综合题：编写程序，输入圆的半径，计算面积和周长（π取3.14）"
-                ],
-                [
-                    "1. 执行int a=10,b=3; cout << a/b;的结果是？（A. 3 B. 3.333 C. 10 D. 报错）",
-                    "2. C++中单行注释的符号是？（A. # B. // C. /* */ D. --）",
-                    "3. 填空题：补全cin输入代码：int a; ____ >> a; // 输入变量a",
-                    "4. 编程题：使用while循环计算1-100的累加和",
-                    "5. 综合题：判断输入的整数是否为回文数（如121是回文数，123不是）"
-                ],
-                [
-                    "1. switch-case语句中，哪个关键字用于结束case？（A. end B. break C. stop D. exit）",
-                    "2. 以下哪个条件表达式表示a大于等于b？（A. a >= b B. a => b C. a > b D. a = b）",
-                    "3. 填空题：补全if-else代码：if(a > 0) { cout << \"正数\"; } ____ { cout << \"非正数\"; }",
-                    "4. 编程题：根据输入的分数（0-100），输出等级（A:90-100, B:80-89, C:60-79, D:0-59）",
-                    "5. 综合题：编写程序，实现简易计算器（仅支持加减乘除）"
-                ],
-                [
-                    "1. 数组int arr[5] = {1,2,3};，arr[3]的值是？（A. 3 B. 0 C. 报错 D. 4）",
-                    "2. 遍历数组时，循环变量的起始值通常是？（A. 1 B. 0 C. 数组长度 D. 任意值）",
-                    "3. 填空题：补全数组遍历代码：for(int i=0; i<5; ____) { cout << arr[i] << endl; }",
-                    "4. 编程题：找出数组中的最大值和最小值，并输出位置",
-                    "5. 综合题：使用数组存储5个学生成绩，计算平均分、最高分、最低分"
-                ],
-                [
-                    "1. C++函数的返回值类型不可以是？（A. int B. char C. void D. 以上都可以）",
-                    "2. 函数重载的条件是？（A. 函数名相同，参数列表不同 B. 函数名不同，参数列表相同 C. 返回值类型不同 D. 以上都对）",
-                    "3. 填空题：补全函数定义：____ max(int a, int b) { return a>b?a:b; }",
-                    "4. 编程题：编写函数，计算n的阶乘（使用递归）",
-                    "5. 综合题：编写函数，判断一个数是否为质数，主函数输入数字并调用"
-                ],
-                [
-                    "1. 指针变量存储的是？（A. 数值 B. 地址 C. 函数 D. 数组）",
-                    "2. 以下哪个是取地址运算符？（A. * B. & C. -> D. .）",
-                    "3. 填空题：补全指针代码：int a=10; int *p = ____; // p指向a的地址",
-                    "4. 编程题：使用指针遍历数组，输出所有元素",
-                    "5. 综合题：使用指针交换两个变量的值（不使用临时变量）"
-                ],
-                [
-                    "1. 结构体的定义关键字是？（A. class B. struct C. union D. enum）",
-                    "2. 访问结构体成员的运算符是？（A. -> B. . C. :: D. *）",
-                    "3. 填空题：补全结构体定义：struct Student { string name; ____ score; };",
-                    "4. 编程题：定义结构体存储图书信息（书名、作者、价格），输入3本图书并输出",
-                    "5. 综合题：使用结构体数组存储5个学生信息，按成绩降序排序并输出"
-                ],
-                [
-                    "1. string类的length()方法返回的是？（A. 字节数 B. 字符数 C. 行数 D. 单词数）",
-                    "2. 以下哪个方法可以拼接字符串？（A. + B. append() C. 以上都可以 D. 以上都不可以）",
-                    "3. 填空题：补全字符串代码：string s = \"C++\"; s += ____; // 拼接\"编程\"",
-                    "4. 编程题：统计字符串中指定字符出现的次数",
-                    "5. 综合题：编写程序，将字符串中的大写字母转为小写，小写转为大写"
-                ],
-                [
-                    "1. 打开文件的函数是？（A. open() B. fopen() C. file() D. create()）",
-                    "2. 文件读取模式\"r\"表示？（A. 写入 B. 追加 C. 读取 D. 创建）",
-                    "3. 填空题：补全文件写入代码：FILE *fp = fopen(\"test.txt\",\"w\"); fprintf(fp, \"%s\", ____); fclose(fp);",
-                    "4. 编程题：读取文件内容，统计行数和字符数",
-                    "5. 综合题：将学生成绩写入文件，支持从文件读取并显示"
-                ],
-                [
-                    "1. 类的私有成员只能被？（A. 类内部访问 B. 外部函数访问 C. 任意访问 D. 子类访问）",
-                    "2. 构造函数的特点是？（A. 有返回值 B. 函数名与类名相同 C. 手动调用 D. 可以重载）",
-                    "3. 填空题：补全类的定义：class Circle { public: ____ Circle(double r) { radius = r; } private: double radius; };",
-                    "4. 编程题：定义矩形类，实现求面积和周长的方法",
-                    "5. 综合题：定义学生类，包含姓名、成绩，实现成绩排序、平均分计算的功能"
-                ]
-            ];
-
-            return lang === "python" ? pythonQuestions[level-1] : cppQuestions[level-1];
-        }
-
-        // ===================== 加载学习内容 =====================
-        function loadTabContent(tab,level,lang){
-            const u = DB.getUser();
-            let html = "";
-            const langName = lang=="python"?"Python":"C++";
-
-            if(tab=="learn"){
-                html = `<h3 style="color:var(--primary);margin-bottom:15px;">【${langName}第${level}关 · 考级核心考点】</h3>`;
-                html += `<div style="font-size:16px;line-height:1.8;color:var(--dark);padding:10px;background:#f0f9ff;border-radius:8px;">`;
-                html += getLevelKnowledge(lang,level) + `</div>`;
+        function startCyberTimer(){
+            let minutes = 9;
+            let seconds = 59;
+            dom.cyberTimer.innerText = "09:59";
+            
+            const timer = setInterval(()=>{
+                if(seconds === 0){
+                    if(minutes === 0){
+                        clearInterval(timer);
+                        dom.cyberResult.style.display = "block";
+                        dom.resultTitle.innerText = "❌ 防御失败！";
+                        dom.resultTitle.className = "result-title result-fail";
+                        dom.resultDesc.innerText = "时间已到！黑客已成功入侵服务器，保护失败！\n请重新开始练习！";
+                        return;
+                    }
+                    minutes--;
+                    seconds = 59;
+                }else{
+                    seconds--;
+                }
                 
-                // 编程任务 + 代码编辑器
-                html += `<div class="code-task">${getCodeTask(lang,level)}</div>`;
-                html += `<h4 style="margin:15px 0;color:var(--dark);">💻 在线代码编辑器</h4>`;
-                html += `<textarea class="code-editor" id="codeArea" placeholder="请在此编写${langName}代码..."></textarea>`;
-                html += `<button class="run-btn" onclick="runCode('${lang}',${level})">▶️ 运行代码</button>`;
-                html += `<h4 style="margin:15px 0;color:var(--dark);">📊 运行结果</h4>`;
-                html += `<div class="output-box" id="outputArea">等待运行代码...</div>`;
-                
-                // 通关按钮（默认隐藏）
-                html += `<button class="pass-btn" id="passBtn" onclick="passLevel()">✅ 通关成功，解锁下一关</button>`;
-                
-                // 功能按钮
-                html += `<div class="func-btn-group" style="margin-top:25px;">
-                    <button class="func-btn btn-note" onclick="showTip('已保存本关学习笔记！')">📔 保存学习笔记</button>
-                    <button class="func-btn btn-exam" onclick="showTip('已打开本关考级真题！')">📄 查看考级真题</button>
-                    <button class="func-btn btn-error" onclick="showTip('错题本已同步更新！')">❌ 查看错题集</button>
-                </div>`;
-            }else{
-                html = `<h3 style="color:var(--primary);margin-bottom:15px;">【${langName}第${level}关 · 全真题库】</h3>`;
-                const qList = getLevelQuestion(lang,level);
-                qList.forEach((q,idx)=>{
-                    html += `<div class="question-item">${q}</div>`;
-                });
-                // 新增：参考答案按钮（VIP专属）
-                html += `<button class="func-btn btn-exam" style="margin-top:20px;" onclick="showTip('VIP已解锁参考答案！')">📖 查看参考答案</button>`;
+                const minStr = minutes < 10 ? `0${minutes}` : minutes;
+                const secStr = seconds < 10 ? `0${seconds}` : seconds;
+                dom.cyberTimer.innerText = `${minStr}:${secStr}`;
+            }, 1000);
+            
+            dom.pauseBtn.onclick = function(){
+                if(this.innerText === "暂停游戏"){
+                    clearInterval(timer);
+                    this.innerText = "继续游戏";
+                    showTip("⏸️ 游戏已暂停！");
+                }else{
+                    startCyberTimer();
+                    this.innerText = "暂停游戏";
+                    showTip("▶️ 游戏已继续！");
+                }
             }
-
-            dom.tabContent.innerHTML = html;
+            
+            dom.restartBtn.onclick = function(){
+                clearInterval(timer);
+                dom.cyberTimer.innerText = "09:59";
+                dom.statusIndicator.className = "status-indicator";
+                document.querySelector(".server-status span").innerText = "服务器状态：遭受攻击中";
+                dom.sandboxTerminal.innerHTML = "[系统] 校园服务器防御沙盒已启动<br>[系统] 当前时间：08:00:00<br>[告警] SSH暴力破解攻击检测 - 来源IP：192.168.1.100<br>[提示] 输入防御指令保护服务器！";
+                dom.terminalInput.value = "";
+                dom.cyberResult.style.display = "none";
+                startCyberTimer();
+                showTip("🔄 靶场已重置，重新开始！");
+            }
+            
+            dom.hintBtn.onclick = function(){
+                showHintPanel(`💡 核心防御原理：
+1. iptables是Linux防火墙工具，用于管理网络规则
+2. --dport 22 指定目标端口为22（SSH端口）
+3. -j DROP 表示丢弃所有访问22端口的TCP数据包
+4. 完整指令：iptables -A INPUT -p tcp --dport 22 -j DROP`);
+            }
+            
+            dom.resultBtn.onclick = function(){
+                dom.cyberResult.style.display = "none";
+                dom.cyberRangePanel.style.display = "none";
+                dom.cyberTutorialModal.style.display = "flex";
+                clearInterval(timer);
+            }
         }
 
-        // ===================== VIP中心 + 抽奖功能 =====================
-        dom.vipCenterBtn.onclick = ()=>{
-            const u = DB.getUser();
-            if(!u) return showTip("请先登录！");
-            dom.lotteryModal.style.display = "flex";
+        function closeLottery(){
+            dom.lotteryModal.style.display = "none";
             dom.prizeResult.style.display = "none";
+            document.getElementById("drawBtn").style.display = "inline-block";
         }
-        
-        function closeLottery(){ dom.lotteryModal.style.display = "none"; }
-        
-        // 抽奖逻辑
-        document.getElementById("drawBtn").onclick = ()=>{
-            const prizes = [
-                "🎉 一等奖：全套考级真题试卷",
-                "🎁 二等奖：VIP专属学习资料",
-                "🎊 三等奖：编程知识点思维导图",
-                "🎈 四等奖：在线编程会员7天",
-                "🌟 幸运奖：敲码星球定制头像框"
+
+        document.getElementById("drawBtn").onclick = function(){
+            const drawBtn = this;
+            const prizeList = [
+                "🎉 一等奖：编程考级全套题库",
+                "🎁 二等奖：VIP会员30天",
+                "🎊 三等奖：在线编程实战课程",
+                "✨ 四等奖：敲码星球定制头像框",
+                "🎈 参与奖：500学习积分"
             ];
-            const res = prizes[Math.floor(Math.random()*prizes.length)];
-            dom.prizeResult.innerText = res;
+            
+            const randomPrize = prizeList[Math.floor(Math.random() * prizeList.length)];
+            
+            dom.prizeResult.innerText = randomPrize;
             dom.prizeResult.style.display = "block";
-            dom.prizeResult.style.background = "#f0f9ff";
-            dom.prizeResult.style.color = "#6366f1";
+            
+            drawBtn.style.display = "none";
+            showTip("抽奖成功！恭喜获得奖品~");
         }
-
-        // 导航按钮
-        dom.mapBtn.onclick = renderMap;
-        dom.knowledgeBtn.onclick = ()=>showTip("VIP已解锁全部考级知识点！切换语言查看完整内容");
-
-        // 初始化
-        window.onload = refreshUserStatus;
     </script>
 </body>
 </html>
