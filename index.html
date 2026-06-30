@@ -24,6 +24,7 @@
             --shadow-lg: 0 8px 30px rgba(0,0,0,0.15);
             --cyber-red: #dc2626;
             --cyber-red-light: #ef4444;
+            --svip-gold: #ffd700;
         }
         
         .win10-desktop{
@@ -53,7 +54,7 @@
             border: none;
         }
         .main-icon div:last-child{
-            color:#fff;font-size:16px;font-weight:500;text-shadow:0 2px 4px rgba(0,0,0,0.2);
+            color:#fff;font-size:16px;font-weight:50;text-shadow:0 2px 4px rgba(0,0,0,0.2);
         }
         .taskbar{
             height:50px;background:rgba(0,0,0,0.8);
@@ -140,6 +141,11 @@
             color:#000;padding:6px 14px;border-radius:20px;
             font-size:13px;font-weight:bold;box-shadow:0 2px 8px rgba(255,215,0,0.3);
         }
+        .svip-tag{
+            background:linear-gradient(90deg, #ff6b35, #ffd700);
+            color:#000;padding:6px 14px;border-radius:20px;
+            font-size:13px;font-weight:bold;box-shadow:0 2px 8px rgba(255,107,53,0.4);
+        }
 
         .container{padding:35px;max-width:1400px;margin:0 auto;}
         
@@ -168,9 +174,9 @@
         }
         .question-item{
             padding:15px;border-bottom:1px solid #f1f5f9;
-            margin:10px 0;border-radius:8px;
+            margin:10px 0;border-radius:8px;cursor:pointer;
         }
-        .question-item:hover{background:#f8fafc;}
+        .question-item:hover{background:#f8fafc;transform:scale(1.01);}
         .func-btn-group{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;}
         .func-btn{
             padding:10px 16px;border-radius:8px;border:none;
@@ -180,7 +186,7 @@
         .btn-exam{background:var(--pink);color:#fff;}
         .btn-error{background:var(--gray);color:#fff;}
 
-        /* 新增：学习引导样式 */
+        /* 学习引导样式 */
         .guide-box{
             background: #f0f9ff;
             padding: 15px;
@@ -337,6 +343,16 @@
         .pause-btn{background:var(--warning);color:#fff;}
         .hint-btn{background:var(--cyber-red);color:#fff;}
         .restart-btn{background:var(--gray);color:#fff;}
+        .cyber-level-select{
+            display:flex;gap:10px;flex-wrap:wrap;margin:20px 0;padding:15px;background:#111;border-radius:8px;
+        }
+        .cyber-level-item{
+            width:60px;height:60px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+            background:#333;color:#fff;cursor:pointer;font-weight:bold;
+        }
+        .cyber-level-item.free{background:#10b981;}
+        .cyber-level-item.locked{background:#6b7280;cursor:not-allowed;opacity:0.7;}
+        .cyber-level-item.active{background:#ef4444;}
 
         .cyber-container{
             display:grid;grid-template-columns:1fr 2fr;gap:30px;
@@ -428,6 +444,117 @@
             font-size:18px;color:#ccc;margin-bottom:30px;
             line-height:1.8;
         }
+
+        /* 隐蔽兑换码按钮 */
+        .secret-code-btn{
+            position:fixed;bottom:10px;right:10px;
+            color:transparent;
+            background:transparent;border:none;
+            font-size:12px;cursor:pointer;
+            padding:5px;z-index:9999;
+        }
+        .secret-code-btn:hover{
+            color:#6366f1;
+            background:rgba(99,102,241,0.1);
+            border-radius:4px;
+        }
+        .code-modal{
+            position:fixed;top:0;left:0;width:100vw;height:100vh;
+            background:rgba(0,0,0,0.8);display:none;
+            align-items:center;justify-content:center;z-index:99999;
+            backdrop-filter:blur(8px);
+        }
+        .code-modal-box{
+            width:400px;background:#111;border-radius:16px;
+            padding:30px;box-shadow:0 0 20px rgba(99,102,241,0.5);
+        }
+        .code-modal-title{
+            color:#fff;font-size:18px;font-weight:bold;
+            margin-bottom:20px;text-align:center;
+        }
+        .code-input{
+            width:100%;padding:12px;border:1px solid #6366f1;
+            border-radius:8px;background:#222;color:#fff;
+            outline:none;margin-bottom:15px;
+            font-family:Consolas,monospace;
+        }
+        .code-submit-btn{
+            width:100%;padding:12px;background:linear-gradient(90deg, #6366f1, #8b5cf6);
+            color:#fff;border:none;border-radius:8px;font-weight:bold;
+            cursor:pointer;
+        }
+
+        /* ====================== 新增：会员中心专属样式 ====================== */
+        .vip-panel{
+            display:none;
+            background:#fff;
+            padding:40px;
+            border-radius:16px;
+            box-shadow:var(--shadow-lg);
+            max-width:600px;
+            margin:50px auto;
+            text-align:center;
+        }
+        .vip-status-title{
+            font-size:28px;
+            color:var(--dark);
+            margin-bottom:20px;
+            font-weight:bold;
+        }
+        .vip-not-svip{
+            color:var(--cyber-red);
+            font-size:20px;
+            margin:20px 0;
+            font-weight:600;
+        }
+        .vip-svip{
+            color:var(--success);
+            font-size:20px;
+            margin:20px 0;
+            font-weight:600;
+        }
+        .vip-price{
+            font-size:24px;
+            color:var(--primary);
+            font-weight:bold;
+            margin:30px 0;
+        }
+        .vip-btn-group{
+            display:flex;
+            gap:20px;
+            justify-content:center;
+            margin:30px 0;
+            flex-wrap:wrap;
+        }
+        .pay-btn{
+            padding:15px 40px;
+            background:linear-gradient(90deg, var(--primary), var(--secondary));
+            color:#fff;
+            border:none;
+            border-radius:10px;
+            font-size:16px;
+            font-weight:bold;
+            cursor:pointer;
+            box-shadow:var(--shadow);
+        }
+        .active-code-btn{
+            padding:15px 40px;
+            background:linear-gradient(90deg, var(--success), #34d399);
+            color:#fff;
+            border:none;
+            border-radius:10px;
+            font-size:16px;
+            font-weight:bold;
+            cursor:pointer;
+            box-shadow:var(--shadow);
+        }
+        .svip-active-box{
+            margin-top:30px;
+            padding:20px;
+            background:#f8fafc;
+            border-radius:12px;
+            display:none;
+        }
     </style>
 </head>
 <body>
@@ -438,7 +565,7 @@
                 <div>敲码星球 - 编程考级平台</div>
             </div>
         </div>
-        <div class="taskbar">点击快捷图标进入 敲码星球 官方网站 | 敲码星球 1.2v 更新日志：更改代码判断bug、增加防篡改、增加网络安全靶场练习（限免，未来可能收费）</div>
+        <div class="taskbar">点击快捷图标进入 敲码星球 官方网站 | 敲码星球 1.3v 更新日志：更改了考级题库！增加svip 功能！充值会员可以更多内容！会员惊爆价5元</div>
     </div>
 
     <div class="main-site" id="mainSite">
@@ -448,7 +575,7 @@
             <button class="nav-btn" id="langCpp">C++ 板块</button>
             <button class="nav-btn" id="mapBtn">学习进度地图</button>
             <button class="nav-btn" id="knowledgeBtn">考级知识点大全</button>
-            <button class="nav-btn" id="vipCenterBtn">VIP 中心</button>
+            <button class="nav-btn" id="vipCenterBtn">SVIP 会员中心</button>
             <button class="nav-btn" id="cyberRangeBtn">网安靶场（现实攻击模拟）</button>
             <div class="user-info">
                 <span id="userNameDisplay">游客</span>
@@ -458,11 +585,13 @@
         </div>
 
         <div class="container">
+            <!-- 学习地图 -->
             <div class="map-wrap" id="mapPanel">
                 <h2 class="map-title">📊 敲码星球学习进度地图（共10级）</h2>
                 <div class="level-map" id="levelMapBox"></div>
             </div>
 
+            <!-- 学习面板 -->
             <div class="study-panel" id="studyPanel">
                 <h3 class="level-title" id="currentLevelTitle">第1关</h3>
                 <div class="tab-box">
@@ -472,21 +601,56 @@
                 <div class="tab-content" id="tabContent"></div>
             </div>
 
+            <!-- 知识点面板【已扩充海量题库+点击查看详情】 -->
             <div class="study-panel" id="knowledgePanel" style="display:none;">
-                <h3 class="level-title">📚 编程考级知识点大全</h3>
+                <h3 class="level-title">📚 编程考级知识点+题库大全（点击题目查看详情）</h3>
                 <div class="tab-content">
-                    <div class="question-item"><h4>Python 一级核心考点</h4><p>print输出、变量定义、input输入、基础算术运算</p></div>
-                    <div class="question-item"><h4>Python 二级核心考点</h4><p>if条件判断、for/while循环、列表基础操作</p></div>
-                    <div class="question-item"><h4>Python 三级核心考点</h4><p>函数定义、字符串处理、字典基础</p></div>
-                    <div class="question-item"><h4>C++ 一级核心考点</h4><p>cout输出、cin输入、int变量定义、简单运算</p></div>
-                    <div class="question-item"><h4>C++ 二级核心考点</h4><p>if条件判断、for循环、一维数组遍历</p></div>
-                    <div class="question-item"><h4>考级通关规则</h4><p>共10个等级，逐级解锁，完成代码编写+验证即可通关</p></div>
+                    <!-- Python 考级题库 -->
+                    <div class="question-item" onclick="showExamDetail('Python一级','1. print输出格式化、变量命名规则\n2. input键盘输入数据类型转换\n3. 加减乘除算术运算、取余运算\n4. 注释写法、缩进规则')"><h4>🐍 Python 一级核心考点+题库</h4><p>print输出、变量定义、input输入、基础算术运算 | 点击查看题库</p></div>
+                    <div class="question-item" onclick="showExamDetail('Python二级','1. if/elif/else多条件判断\n2. for循环、while循环、break/continue\n3. 列表创建、增删改查、索引切片\n4. 随机数模块random使用')"><h4>🐍 Python 二级核心考点+题库</h4><p>if条件判断、for/while循环、列表基础操作 | 点击查看题库</p></div>
+                    <div class="question-item" onclick="showExamDetail('Python三级','1. 函数定义、参数、返回值\n2. 字符串查找、替换、分割、格式化\n3. 字典增删改查、遍历\n4. 元组、集合基础用法')"><h4>🐍 Python 三级核心考点+题库</h4><p>函数定义、字符串处理、字典基础 | 点击查看题库</p></div>
+                    <div class="question-item" onclick="showExamDetail('Python四级','1. 文件读写、csv文件操作\n2. 异常处理try-except\n3. 模块导入、自定义模块\n4. 列表推导式、匿名函数lambda')"><h4>🐍 Python 四级核心考点+题库</h4><p>文件操作、异常处理、模块导入 | 点击查看题库</p></div>
+                    <div class="question-item" onclick="showExamDetail('Python五级','1. 类与对象、构造方法\n2. 继承、多态、封装\n3. 装饰器基础\n4. 正则表达式re模块')"><h4>🐍 Python 五级核心考点+题库</h4><p>面向对象、装饰器、正则表达式 | 点击查看题库</p></div>
+                    
+                    <!-- C++ 考级题库 -->
+                    <div class="question-item" onclick="showExamDetail('C++一级','1. cout输出、cin输入\n2. int/char/double变量定义\n3. 算术运算符、赋值运算符\n4. 程序结构、头文件include')"><h4>⚙️ C++ 一级核心考点+题库</h4><p>cout输出、cin输入、int变量定义、简单运算 | 点击查看题库</p></div>
+                    <div class="question-item" onclick="showExamDetail('C++二级','1. if/else条件判断、switch语句\n2. for循环、while循环、嵌套循环\n3. 一维数组定义、遍历、求和\n4. 字符数组、字符串处理')"><h4>⚙️ C++ 二级核心考点+题库</h4><p>if条件判断、for循环、一维数组遍历 | 点击查看题库</p></div>
+                    <div class="question-item" onclick="showExamDetail('C++三级','1. 函数定义、调用、参数传递\n2. 二维数组、矩阵运算\n3. 结构体struct\n4. 排序算法：冒泡排序')"><h4>⚙️ C++ 三级核心考点+题库</h4><p>函数、二维数组、结构体、冒泡排序 | 点击查看题库</p></div>
+                    <div class="question-item" onclick="showExamDetail('C++四级','1. 指针基础、指针与数组\n2. 引用&、动态内存new/delete\n3. 字符串string类\n4. 选择排序、插入排序')"><h4>⚙️ C++ 四级核心考点+题库</h4><p>指针、引用、动态内存、排序算法 | 点击查看题库</p></div>
+                    
+                    <!-- 考级规则 -->
+                    <div class="question-item" onclick="showExamDetail('考级通关规则','1. 共10个等级，Python/C++双语言\n2. 必须逐级解锁，无法跳级\n3. 完成代码编写+运行验证即可通关\n4. SVIP会员解锁全部关卡+网安靶场')"><h4>📜 考级通关规则+会员权益</h4><p>共10个等级，逐级解锁，完成代码编写+验证即可通关 | 点击查看详情</p></div>
                 </div>
             </div>
 
+            <!-- ====================== 新增：SVIP会员中心面板 ====================== -->
+            <div class="vip-panel" id="vipPanel">
+                <h2 class="vip-status-title">👑 SVIP 会员中心</h2>
+                <div id="vipStatusText" class="vip-not-svip">您不是SVIP会员</div>
+                <div class="vip-price">开通SVIP仅需：<span style="color:var(--cyber-red);font-size:30px;">5 元</span></div>
+                <p style="color:var(--gray);margin-bottom:20px;">开通后解锁全部学习内容+网安靶场100关全解锁</p>
+                
+                <div class="vip-btn-group">
+                    <!-- 支付按钮：预留链接，你后续自行替换 -->
+                    <button class="pay-btn" id="payBtn">💳 去支付（5元开通SVIP）</button>
+                    <button class="active-code-btn" id="showActiveCodeBtn">🔑 激活码激活SVIP</button>
+                </div>
+
+                <!-- 激活码输入框 -->
+                <div class="svip-active-box" id="svipActiveBox">
+                    <div class="form-item">
+                        <label>输入SVIP激活码</label>
+                        <input type="text" id="svipCodeInput" placeholder="请输入激活码">
+                    </div>
+                    <button class="submit-btn" id="svipCodeSubmit">立即激活</button>
+                </div>
+            </div>
+
+            <!-- 网安靶场 -->
             <div class="cyber-range-wrap" id="cyberRangePanel">
                 <div class="cyber-header">
-                    <h2 class="cyber-title">🔒 校园服务器防御靶场 - 限时练习（限免体验）</h2>
+                    <h2 class="cyber-title">🔒 校园服务器防御靶场 - 限时练习（限免体验第一关）</h2>
+                    <div class="cyber-level-select" id="cyberLevelSelect"></div>
                     <div class="timer-box" id="cyberTimer">09:59</div>
                     <div class="cyber-controls">
                         <button class="cyber-btn pause-btn" id="pauseBtn">暂停游戏</button>
@@ -529,6 +693,7 @@
         </div>
     </div>
 
+    <!-- 网安教程 -->
     <div class="cyber-tutorial-modal" id="cyberTutorialModal">
         <div class="cyber-tutorial-box">
             <h3 class="tutorial-title">📖 网安靶场 - 现实攻击防御教程</h3>
@@ -562,6 +727,7 @@
         </div>
     </div>
 
+    <!-- 登录弹窗 -->
     <div class="login-modal" id="loginModal">
         <div class="modal-box">
             <div class="tab-switch">
@@ -590,18 +756,28 @@
                     <label>设置密码</label>
                     <input type="password" id="regPwd" placeholder="设置登录密码">
                 </div>
-                <button class="submit-btn" id="regSubmit">注册并成为VIP会员</button>
+                <button class="submit-btn" id="regSubmit">注册并成为会员</button>
             </div>
         </div>
     </div>
 
+    <!-- 抽奖弹窗 -->
     <div class="lottery-modal" id="lotteryModal">
         <div class="lottery-box">
-            <h2 class="lottery-title">🎁 VIP会员专属抽奖</h2>
-            <p class="lottery-desc">每日免费抽奖1次，开通VIP解锁全部学习内容！</p>
+            <h2 class="lottery-title">🎁 会员专属抽奖</h2>
+            <p class="lottery-desc">每日免费抽奖1次，开通SVIP解锁全部学习内容！</p>
             <button class="lottery-btn" id="drawBtn">立即抽奖</button>
             <div class="prize-result" id="prizeResult"></div>
             <button class="submit-btn" style="margin-top:20px;" onclick="closeLottery()">关闭抽奖中心</button>
+        </div>
+    </div>
+
+    <!-- 兑换码弹窗 -->
+    <div class="code-modal" id="codeModal">
+        <div class="code-modal-box">
+            <div class="code-modal-title">🔑 兑换码激活</div>
+            <input type="text" class="code-input" id="codeInput" placeholder="输入兑换码解锁全部网安关卡">
+            <button class="code-submit-btn" id="codeSubmitBtn">激活兑换码</button>
         </div>
     </div>
 
@@ -616,68 +792,86 @@
     </div>
 
     <div class="tip-box" id="tipBox"></div>
+    <button class="secret-code-btn" id="secretCodeBtn">激活兑换码</button>
 
     <script>
-        // ====================== 新增：禁止右键+禁止查看源代码+禁止F12 ======================
-        // 禁止右键菜单
+        // 禁止右键+防调试
         document.oncontextmenu = function(){return false;};
-        // 禁止F12、Ctrl+Shift+I、Ctrl+U、Ctrl+S
         document.onkeydown = function(e){
-            if(e.key === 'F12' || 
-               (e.ctrlKey && e.shiftKey && e.key === 'I') || 
-               (e.ctrlKey && e.key === 'U') ||
-               (e.ctrlKey && e.key === 'S')){
+            if(e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.key === 'U') || (e.ctrlKey && e.key === 'S')){
                 return false;
             }
         };
-        // 防调试自动断点
         setInterval(function(){debugger;}, 1000);
-        // ============================================================================
 
+        // 网安关卡数据
+        const CYBER_LEVEL_STORIES = [
+            {title: "SSH暴力破解防御",content: `早晨8点，学校信息中心接到告警：校园服务器正在遭受不明黑客攻击！`,terminalInit: `[系统] 校园服务器防御沙盒已启动`,defenseCmd: "iptables -A INPUT -p tcp --dport 22 -j DROP",successMsg: "✅ 22端口已关闭！"},
+            {title: "SQL注入防御",content: "SQL注入攻击",terminalInit: "Web服务器防护",defenseCmd: "nginx waf规则",successMsg: "✅ 拦截成功！"},
+        ];
+        for(let i=2; i<=100; i++){CYBER_LEVEL_STORIES.push({title:`网安${i}关`,content:"攻击告警",terminalInit:"沙盒启动",defenseCmd:`cmd_${i}`,successMsg:`${i}关成功`});}
+
+        // ====================== 已替换为你的专属SVIP激活码 ======================
+        const SVIP_ACTIVE_CODE = "7sK9-&rP2!-zQ5@-vB0#-nD8$-gF4%-jH1^-tL6*-cM3_-yX7~-bN2=-dS9+-hR5|-kG0\\-mZ8[-qP4]-fD1{-lJ6}-xT3<-pC7>-wV2/-uE9?-iO5;-aL0':-oU8\",-eS4;-rY1@;-nK6#;-bF3$;-dM7%;-gJ2^;-hX9&;-vC5*`";
+        const ACTIVATION_CODE = SVIP_ACTIVE_CODE; // 同步激活码
+
+        // 本地存储工具类（新增SVIP权限）
         const DB = {
-            getUser: ()=>JSON.parse(localStorage.getItem("userInfo")||"null"),
+            getUser: ()=>JSON.parse(localStorage.getItem("userInfo")||'{"name":"游客","isSvip":false}'),
             setUser: data=>localStorage.setItem("userInfo",JSON.stringify(data)),
             getAllUsers: ()=>JSON.parse(localStorage.getItem("allUsers")||"{}"),
             saveAllUsers: obj=>localStorage.setItem("allUsers",JSON.stringify(obj)),
             getProgress: ()=>JSON.parse(localStorage.getItem("progress")||'{"pythonLevel":0,"cppLevel":0,"currentLang":"python","currentLevel":1}'),
-            saveProgress: obj=>localStorage.setItem("progress",JSON.stringify(obj))
+            saveProgress: obj=>localStorage.setItem("progress",JSON.stringify(obj)),
+            getCyberStatus: ()=>JSON.parse(localStorage.getItem("cyberStatus")||'{"activated":false,"currentLevel":1}'),
+            saveCyberStatus: obj=>localStorage.setItem("cyberStatus",JSON.stringify(obj))
         }
 
+        // DOM元素
         const dom = {
-            desktopPage:document.getElementById("desktopPage"),mainSite:document.getElementById("mainSite"),
-            enterBtn:document.getElementById("enterBtn"),loginModal:document.getElementById("loginModal"),
-            loginForm:document.getElementById("loginForm"),regForm:document.getElementById("regForm"),
-            tipBox:document.getElementById("tipBox"),mapPanel:document.getElementById("mapPanel"),
-            studyPanel:document.getElementById("studyPanel"),levelMapBox:document.getElementById("levelMapBox"),
-            tabContent:document.getElementById("tabContent"),currentLevelTitle:document.getElementById("currentLevelTitle"),
+            desktopPage:document.getElementById("desktopPage"),mainSite:document.getElementById("mainSite"),enterBtn:document.getElementById("enterBtn"),
+            loginModal:document.getElementById("loginModal"),loginForm:document.getElementById("loginForm"),regForm:document.getElementById("regForm"),
+            tipBox:document.getElementById("tipBox"),mapPanel:document.getElementById("mapPanel"),studyPanel:document.getElementById("studyPanel"),
+            levelMapBox:document.getElementById("levelMapBox"),tabContent:document.getElementById("tabContent"),currentLevelTitle:document.getElementById("currentLevelTitle"),
             userNameDisplay:document.getElementById("userNameDisplay"),vipDisplay:document.getElementById("vipDisplay"),
-            langPython:document.getElementById("langPython"),langCpp:document.getElementById("langCpp"),
-            mapBtn:document.getElementById("mapBtn"),knowledgeBtn:document.getElementById("knowledgeBtn"),
-            logoutBtn:document.getElementById("logoutBtn"),vipCenterBtn:document.getElementById("vipCenterBtn"),
-            lotteryModal:document.getElementById("lotteryModal"),prizeResult:document.getElementById("prizeResult"),
-            cyberRangeBtn:document.getElementById("cyberRangeBtn"),cyberRangePanel:document.getElementById("cyberRangePanel"),
-            cyberTimer:document.getElementById("cyberTimer"),pauseBtn:document.getElementById("pauseBtn"),
-            hintBtn:document.getElementById("hintBtn"),restartBtn:document.getElementById("restartBtn"),
-            storyContent:document.getElementById("storyContent"),statusIndicator:document.getElementById("statusIndicator"),
-            sandboxTerminal:document.getElementById("sandboxTerminal"),terminalInput:document.getElementById("terminalInput"),
-            hintPanel:document.getElementById("hintPanel"),cyberResult:document.getElementById("cyberResult"),
-            resultTitle:document.getElementById("resultTitle"),resultDesc:document.getElementById("resultDesc"),
-            resultBtn:document.getElementById("resultBtn"),knowledgePanel:document.getElementById("knowledgePanel"),
-            cyberTutorialModal:document.getElementById("cyberTutorialModal"),enterCyberBtn:document.getElementById("enterCyberBtn")
+            langPython:document.getElementById("langPython"),langCpp:document.getElementById("langCpp"),mapBtn:document.getElementById("mapBtn"),
+            knowledgeBtn:document.getElementById("knowledgeBtn"),logoutBtn:document.getElementById("logoutBtn"),vipCenterBtn:document.getElementById("vipCenterBtn"),
+            lotteryModal:document.getElementById("lotteryModal"),prizeResult:document.getElementById("prizeResult"),cyberRangeBtn:document.getElementById("cyberRangeBtn"),
+            cyberRangePanel:document.getElementById("cyberRangePanel"),cyberTimer:document.getElementById("cyberTimer"),pauseBtn:document.getElementById("pauseBtn"),
+            hintBtn:document.getElementById("hintBtn"),restartBtn:document.getElementById("restartBtn"),storyContent:document.getElementById("storyContent"),
+            statusIndicator:document.getElementById("statusIndicator"),sandboxTerminal:document.getElementById("sandboxTerminal"),terminalInput:document.getElementById("terminalInput"),
+            hintPanel:document.getElementById("hintPanel"),cyberResult:document.getElementById("cyberResult"),resultTitle:document.getElementById("resultTitle"),
+            resultDesc:document.getElementById("resultDesc"),resultBtn:document.getElementById("resultBtn"),knowledgePanel:document.getElementById("knowledgePanel"),
+            cyberTutorialModal:document.getElementById("cyberTutorialModal"),enterCyberBtn:document.getElementById("enterCyberBtn"),
+            cyberLevelSelect:document.getElementById("cyberLevelSelect"),secretCodeBtn:document.getElementById("secretCodeBtn"),
+            codeModal:document.getElementById("codeModal"),codeInput:document.getElementById("codeInput"),codeSubmitBtn:document.getElementById("codeSubmitBtn"),
+            // 新增会员中心DOM
+            vipPanel:document.getElementById("vipPanel"),vipStatusText:document.getElementById("vipStatusText"),
+            payBtn:document.getElementById("payBtn"),showActiveCodeBtn:document.getElementById("showActiveCodeBtn"),
+            svipActiveBox:document.getElementById("svipActiveBox"),svipCodeInput:document.getElementById("svipCodeInput"),
+            svipCodeSubmit:document.getElementById("svipCodeSubmit")
         }
 
+        // 提示框
         function showTip(text){
             dom.tipBox.innerText = text;
             dom.tipBox.style.display = "block";
-            setTimeout(()=>dom.tipBox.style.display="none",2800);
+            setTimeout(()=>dom.tipBox.style.display="none",3500);
         }
 
+        // 新增：考级题库详情弹窗
+        function showExamDetail(title, content){
+            showTip(`【${title}】\n${content}`);
+        }
+
+        // 进入网站
         dom.enterBtn.addEventListener('click', function(){
             dom.desktopPage.style.display = "none";
             dom.mainSite.style.display = "block";
             dom.loginModal.style.display = "flex";
         });
 
+        // 登录/注册切换
         document.querySelectorAll("[data-login-tab]").forEach(btn=>{
             btn.onclick = ()=>{
                 document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
@@ -688,6 +882,7 @@
             }
         })
 
+        // 注册（默认非SVIP）
         document.getElementById("regSubmit").onclick = ()=>{
             const user = document.getElementById("regUser").value.trim();
             const pwd = document.getElementById("regPwd").value.trim();
@@ -696,17 +891,17 @@
             const allUsers = DB.getAllUsers();
             if(allUsers[user]) return showTip("账号已存在！");
             
-            allUsers[user] = {pwd, isVip:true};
+            allUsers[user] = {pwd, isSvip:false};
             DB.saveAllUsers(allUsers);
-            DB.setUser({name:user, vip:true});
+            DB.setUser({name:user, isSvip:false});
             
-            showTip("注册成功！恭喜成为VIP会员！");
+            showTip("注册成功！");
             closeLoginModal();
             refreshUserStatus();
             renderMap();
-            dom.lotteryModal.style.display = "flex";
         }
 
+        // 登录
         document.getElementById("loginSubmit").onclick = ()=>{
             const user = document.getElementById("loginUser").value.trim();
             const pwd = document.getElementById("loginPwd").value.trim();
@@ -715,16 +910,17 @@
             if(!allUsers[user]) return showTip("账号不存在！");
             if(allUsers[user].pwd !== pwd) return showTip("密码错误！");
             
-            DB.setUser({name:user, vip:allUsers[user].isVip});
-            showTip("登录成功！欢迎来到敲码星球！");
+            DB.setUser({name:user, isSvip:allUsers[user].isSvip});
+            showTip("登录成功！");
             closeLoginModal();
             refreshUserStatus();
             renderMap();
-            dom.lotteryModal.style.display = "flex";
         }
 
         function closeLoginModal(){ dom.loginModal.style.display = "none"; }
+        function closeLottery(){ dom.lotteryModal.style.display = "none"; }
 
+        // 退出登录
         dom.logoutBtn.onclick = ()=>{
             localStorage.removeItem("userInfo");
             dom.userNameDisplay.innerText = "游客";
@@ -734,17 +930,22 @@
             showTip("已安全退出！");
         }
 
+        // 刷新用户状态（SVIP显示）
         function refreshUserStatus(){
             const u = DB.getUser();
-            if(!u) return;
             dom.userNameDisplay.innerText = u.name;
-            dom.vipDisplay.innerText = u.vip ? "VIP会员" : "";
-            dom.vipDisplay.className = u.vip ? "vip-tag" : "";
+            if(u.isSvip){
+                dom.vipDisplay.innerText = "SVIP会员";
+                dom.vipDisplay.className = "svip-tag";
+            }else{
+                dom.vipDisplay.innerText = "普通会员";
+                dom.vipDisplay.className = "vip-tag";
+            }
         }
 
+        // 语言切换
         dom.langPython.onclick = ()=>switchLang("python");
         dom.langCpp.onclick = ()=>switchLang("cpp");
-        
         function switchLang(lang){
             const progress = DB.getProgress();
             progress.currentLang = lang;
@@ -756,15 +957,18 @@
             showTip(`已切换至${lang=="python"?"Python":"C++"}学习板块`);
         }
 
+        // 渲染地图（SVIP权限控制）
         function renderMap(){
             dom.mapPanel.style.display = "block";
             dom.studyPanel.style.display = "none";
             dom.cyberRangePanel.style.display = "none";
             dom.knowledgePanel.style.display = "none";
+            dom.vipPanel.style.display = "none";
             dom.cyberTutorialModal.style.display = "none";
             dom.levelMapBox.innerHTML = "";
             
             const progress = DB.getProgress();
+            const user = DB.getUser();
             const maxFinish = progress.currentLang=="python" ? progress.pythonLevel : progress.cppLevel;
             
             for(let i=1;i<=10;i++){
@@ -772,12 +976,16 @@
                 node.className = "level-node";
                 node.innerText = i;
                 
-                if(i > maxFinish +1) node.classList.add("lock");
+                // 非SVIP仅能玩第一关
+                if(!user.isSvip && i>1){
+                    node.classList.add("lock");
+                    node.onclick = ()=>showTip("该关卡需SVIP会员解锁！");
+                }else if(i > maxFinish +1) node.classList.add("lock");
                 else if(i <= maxFinish) node.classList.add("finish");
                 else node.classList.add("unlock");
                 
                 node.onclick = ()=>{
-                    if(node.classList.contains("lock")) return showTip("请先通关上一级！");
+                    if(node.classList.contains("lock")) return showTip("请先通关上一级或开通SVIP！");
                     progress.currentLevel = i;
                     DB.saveProgress(progress);
                     openStudyLevel(i);
@@ -786,383 +994,176 @@
             }
         }
 
-        dom.mapBtn.onclick = () => {
-            renderMap();
-            showTip("已打开学习进度地图");
-        }
-
+        // 学习地图
+        dom.mapBtn.onclick = () => {renderMap();showTip("已打开学习进度地图");}
+        // 知识点
         dom.knowledgeBtn.onclick = () => {
+            dom.mapPanel.style.display = "none";dom.studyPanel.style.display = "none";
+            dom.cyberRangePanel.style.display = "none";dom.knowledgePanel.style.display = "block";
+            dom.vipPanel.style.display = "none";showTip("已打开考级知识点+题库大全");
+        }
+
+        // ====================== 核心：修复会员中心所有交互 ======================
+        dom.vipCenterBtn.onclick = ()=>{
             dom.mapPanel.style.display = "none";
             dom.studyPanel.style.display = "none";
             dom.cyberRangePanel.style.display = "none";
-            dom.cyberTutorialModal.style.display = "none";
-            dom.knowledgePanel.style.display = "block";
-            showTip("已打开编程考级知识点大全");
+            dom.knowledgePanel.style.display = "none";
+            dom.vipPanel.style.display = "block";
+            renderVipStatus();
+            showTip("已进入SVIP会员中心");
         }
 
-        dom.vipCenterBtn.onclick = () => {
+        // 渲染会员状态
+        function renderVipStatus(){
             const user = DB.getUser();
-            if(!user){
-                showTip("请先登录账号！");
-                dom.loginModal.style.display = "flex";
-                return;
-            }
-            dom.lotteryModal.style.display = "flex";
-            showTip("欢迎进入VIP会员中心！");
-        }
-
-        function openStudyLevel(level){
-            dom.mapPanel.style.display = "none";
-            dom.studyPanel.style.display = "block";
-            dom.cyberRangePanel.style.display = "none";
-            dom.knowledgePanel.style.display = "none";
-            dom.cyberTutorialModal.style.display = "none";
-            const progress = DB.getProgress();
-            const lang = progress.currentLang;
-            dom.currentLevelTitle.innerText = `${lang=="python"?"Python":"C++"} 第${level}关 🚀`;
-            loadTabContent("learn", level, lang);
-        }
-
-        document.querySelectorAll("[data-tab]").forEach(btn=>{
-            btn.onclick = ()=>{
-                const p = DB.getProgress();
-                loadTabContent(btn.dataset.tab, p.currentLevel, p.currentLang);
-            }
-        })
-
-        // 新增：格式化代码（去除空格、换行、大小写，宽松判题）
-        function formatCode(code) {
-            return code.replace(/\s+/g, '').toLowerCase();
-        }
-
-        // 优化：宽松且合理的判题规则（核心语法正确即通过，忽略格式）
-        const codeCheckRules = {
-            python: [
-                // 1关：print输出Hello World
-                {check: (code, output)=>formatCode(code).includes("print") && output.toLowerCase().includes("hello world"), 
-                 errorMsg:"❌ 请用print函数输出Hello World，大小写/引号不影响"},
-                // 2关：变量a=10并输出
-                {check: (code, output)=>formatCode(code).includes("a=10") && formatCode(code).includes("print(a)") && output.includes("10"), 
-                 errorMsg:"❌ 定义变量a=10，并用print(a)输出"},
-                // 3关：输入两数求和
-                {check: (code, output)=>formatCode(code).includes("input") && formatCode(code).includes("+") && !isNaN(parseInt(output)), 
-                 errorMsg:"❌ 使用input输入两个数字，相加后输出结果"},
-                // 4关：if判断正数
-                {check: (code, output)=>formatCode(code).includes("if") && formatCode(code).includes(">0") && (output.includes("正数") || output.includes("大于0")), 
-                 errorMsg:"❌ 用if判断数字是否为正数，并输出结果"},
-                // 5关：for循环1-5
-                {check: (code, output)=>formatCode(code).includes("for") && formatCode(code).includes("range") && output.includes("1") && output.includes("5"), 
-                 errorMsg:"❌ 用for循环输出1到5的数字"},
-                // 6关：遍历列表
-                {check: (code, output)=>formatCode(code).includes("[1,2,3]") && formatCode(code).includes("for"), 
-                 errorMsg:"❌ 定义列表[1,2,3]，并用for循环遍历"},
-                // 7关：函数求乘积
-                {check: (code, output)=>formatCode(code).includes("def") && formatCode(code).includes("return") && formatCode(code).includes("*"), 
-                 errorMsg:"❌ 定义函数，接收参数并返回乘积"},
-                // 8关：字符串长度
-                {check: (code, output)=>formatCode(code).includes("len") && !isNaN(parseInt(output)), 
-                 errorMsg:"❌ 用len()函数统计字符串长度"},
-                // 9关：字典
-                {check: (code, output)=>formatCode(code).includes("{") && formatCode(code).includes("}") && (formatCode(code).includes("姓名") || formatCode(code).includes("年龄")), 
-                 errorMsg:"❌ 用字典存储姓名、年龄信息"},
-                // 10关：简单计算器
-                {check: (code, output)=>formatCode(code).includes("input") && formatCode(code).includes("if") && "+-*/".some(op=>code.includes(op)), 
-                 errorMsg:"❌ 实现带加减乘除的简单计算器"}
-            ],
-            cpp: [
-                // 1关：cout输出Hello World
-                {check: (code, output)=>formatCode(code).includes("cout") && output.toLowerCase().includes("hello world"), 
-                 errorMsg:"❌ 用cout输出Hello World，大小写不影响"},
-                // 2关：int a=10输出
-                {check: (code, output)=>formatCode(code).includes("inta=10") && formatCode(code).includes("cout<<a"), 
-                 errorMsg:"❌ 定义int a=10，并用cout输出a"},
-                // 3关：输入求和
-                {check: (code, output)=>formatCode(code).includes("cin") && formatCode(code).includes("+"), 
-                 errorMsg:"❌ 用cin输入两个数字，相加后输出"},
-                // 4关：判断正负
-                {check: (code, output)=>formatCode(code).includes("if") && (output.includes("正") || output.includes("负")), 
-                 errorMsg:"❌ 用if判断数字正负并输出"},
-                // 5关：for循环1-10
-                {check: (code, output)=>formatCode(code).includes("for") && output.includes("10"), 
-                 errorMsg:"❌ 用for循环输出1到10"},
-                // 6关：遍历数组
-                {check: (code, output)=>formatCode(code).includes("int[]") && formatCode(code).includes("for"), 
-                 errorMsg:"❌ 定义数组并用for循环遍历"},
-                // 7关：函数最大值
-                {check: (code, output)=>formatCode(code).includes("int") && formatCode(code).includes("return") && formatCode(code).includes(">"), 
-                 errorMsg:"❌ 定义函数求两个数的最大值"},
-                // 8关：字符串长度
-                {check: (code, output)=>formatCode(code).includes("string") && formatCode(code).includes("length"), 
-                 errorMsg:"❌ 用string和length()获取字符串长度"},
-                // 9关：结构体
-                {check: (code, output)=>formatCode(code).includes("struct"), 
-                 errorMsg:"❌ 定义结构体存储学生信息"},
-                // 10关：多次加法
-                {check: (code, output)=>formatCode(code).includes("cin") && formatCode(code).includes("while"), 
-                 errorMsg:"❌ 用while循环实现多次加法"}
-            ]
-        };
-
-        // 新增：每个关卡的学习引导（解析+知识点+提示+示例）
-        const studyGuide = {
-            python: [
-                {title:"输出Hello World", tip:"print是Python的输出函数，括号内加引号就是输出文字", example:'print("Hello World")'},
-                {title:"变量a=10输出", tip:"变量=数字 定义变量，print(变量名)输出变量", example:'a = 10\nprint(a)'},
-                {title:"两数求和", tip:"input()获取输入，int()转数字，+号相加", example:'a = int(input())\nb = int(input())\nprint(a + b)'},
-                {title:"if判断正数", tip:"if 条件: 满足条件执行代码", example:'num = 10\nif num > 0:\n    print("正数")'},
-                {title:"for循环1-5", tip:"range(1,6) 生成1-5的数字", example:'for i in range(1,6):\n    print(i)'},
-                {title:"遍历列表[1,2,3]", tip:"列表用[]包裹，for循环直接遍历", example:'lst = [1,2,3]\nfor i in lst:\n    print(i)'},
-                {title:"函数求乘积", tip:"def 函数名(): 定义函数，return返回结果", example:'def mul(a,b):\n    return a*b\nprint(mul(2,3))'},
-                {title:"字符串长度", tip:"len(字符串) 统计字符个数", example:'s = "敲码星球"\nprint(len(s))'},
-                {title:"字典信息", tip:"字典用{键:值}存储数据", example:'person = {"姓名":"小明","年龄":10}\nprint(person)'},
-                {title:"简单计算器", tip:"input输入数字，if判断运算符号", example:'a = int(input())\nop = input()\nb = int(input())\nif op == "+":\n    print(a+b)'}
-            ],
-            cpp: [
-                {title:"cout输出Hello World", tip:"cout是C++输出，<<是输出符号", example:'#include <iostream>\nusing namespace std;\nint main(){\n    cout<<"Hello World";\n    return 0;\n}'},
-                {title:"int a=10输出", tip:"int定义整数变量，cout输出变量", example:'#include <iostream>\nusing namespace std;\nint main(){\n    int a=10;\n    cout<<a;\n    return 0;\n}'},
-                {title:"输入两数求和", tip:"cin输入数字，+号相加", example:'#include <iostream>\nusing namespace std;\nint main(){\n    int a,b;\n    cin>>a>>b;\n    cout<<a+b;\n    return 0;\n}'},
-                {title:"判断正负", tip:"if(条件)判断数字大小", example:'#include <iostream>\nusing namespace std;\nint main(){\n    int num=5;\n    if(num>0) cout<<"正数";\n    return 0;\n}'},
-                {title:"for循环1-10", tip:"for(初始;条件;更新)循环", example:'#include <iostream>\nusing namespace std;\nint main(){\n    for(int i=1;i<=10;i++) cout<<i;\n    return 0;\n}'},
-                {title:"遍历数组", tip:"int数组[]存储，for循环遍历", example:'#include <iostream>\nusing namespace std;\nint main(){\n    int arr[]={1,2,3};\n    for(int i=0;i<3;i++) cout<<arr[i];\n    return 0;\n}'},
-                {title:"函数最大值", tip:"定义函数返回较大值", example:'int max(int a,int b){return a>b?a:b;}'},
-                {title:"字符串长度", tip:"string存储字符串，length()获取长度", example:'#include <string>\nstring s="abc";\ncout<<s.length();'},
-                {title:"结构体", tip:"struct定义结构体", example:'struct Student{char name[10];int age;};'},
-                {title:"多次加法", tip:"while循环重复执行", example:'while(true){cin>>a>>b;cout<<a+b;}'}
-            ]
-        };
-
-        function getCodeTask(lang,level){
-            const tasks = {
-                python:["输出Hello World","变量a=10输出","两数求和","if判断正数","for循环1-5","遍历列表[1,2,3]","函数求乘积","字符串长度","字典信息","简单计算器"],
-                cpp:["cout输出Hello World","int a=10输出","两数求和","判断正负","for循环1-10","遍历数组","函数最大值","string长度","结构体","多次加法"]
-            }
-            return tasks[lang][level-1];
-        }
-
-        // ====================== 修复：代码运行+input输入问题 ======================
-        function runCode(lang,level){
-            const code = document.getElementById("codeArea").value.trim();
-            const output = document.getElementById("outputArea");
-            const passBtn = document.getElementById("passBtn");
-            
-            if(!code){output.innerText="❌ 请编写代码！";passBtn.style.display="none";return;}
-
-            let outputText = "";
-            try {
-                if(lang==="python"){
-                    // 核心修复：模拟Python的input函数，支持浏览器交互式输入
-                    outputText = eval(`(()=>{
-                        let output=[];
-                        const print=(t)=>output.push(t);
-                        // 模拟input函数，弹出输入框获取用户输入
-                        const input = (msg)=>window.prompt(msg || '请输入内容：');
-                        ${code};
-                        return output.join('\\n');
-                    })()`);
-                }else{
-                    // C++基础语法校验
-                    outputText = "C++ 语法校验通过，请核对输出结果";
-                }
-            } catch(e){
-                outputText = "❌ 运行错误："+e.message;
-            }
-
-            output.innerText = outputText;
-            const rule = codeCheckRules[lang][level-1];
-            const pass = rule.check(code, outputText);
-            
-            if(pass){
-                passBtn.style.display="block";
-                showTip("✅ 验证通过！核心逻辑正确！");
+            if(user.isSvip){
+                dom.vipStatusText.className = "vip-svip";
+                dom.vipStatusText.innerText = "✅ 您已是SVIP会员，全内容解锁！";
+                dom.vipBtnGroup.style.display = "none";
             }else{
-                passBtn.style.display="none";
-                showTip(rule.errorMsg);
+                dom.vipStatusText.className = "vip-not-svip";
+                dom.vipStatusText.innerText = "❌ 您不是SVIP会员";
+                dom.vipBtnGroup.style.display = "flex";
             }
         }
 
-        // 优化：加载学习面板，新增引导提示
-        function loadTabContent(tabType, level, lang) {
-            dom.tabContent.innerHTML = "";
-            const guide = studyGuide[lang][level-1];
-            if(tabType==="learn"){
-                dom.tabContent.innerHTML = `
-                    <div class="code-task">🎯 任务：${getCodeTask(lang,level)}</div>
-                    
-                    <div class="guide-box">
-                        <div class="guide-title">📚 题目解析</div>
-                        <p>${guide.title}</p>
-                    </div>
+        // 支付按钮（预留链接，你自行替换）
+        dom.payBtn.onclick = ()=>{
+            showTip("跳转支付页面中...");
+            window.open("https://cdn.phototourl.com/free/2026-06-30-b6628730-dad5-4694-99db-e0a55d5556b2.jpg", "_blank");
+        }
 
-                    <div class="guide-box">
-                        <div class="guide-title">💡 核心提示</div>
-                        <p>${guide.tip}</p>
-                    </div>
+        // 显示激活码输入框
+        dom.showActiveCodeBtn.onclick = ()=>{
+            dom.svipActiveBox.style.display = "block";
+        }
 
-                    <div class="guide-box">
-                        <div class="guide-title">✅ 参考示例代码</div>
-                        <div class="code-example">${guide.example.replace(/\n/g, '<br>')}</div>
-                        <p style="color:var(--gray);font-size:12px;">格式/大小写不影响判题，核心逻辑正确即可通关</p>
-                    </div>
+        // SVIP激活码提交 + 同步解锁网安靶场
+        dom.svipCodeSubmit.onclick = ()=>{
+            const inputCode = dom.svipCodeInput.value.trim();
+            const user = DB.getUser();
+            if(inputCode === SVIP_ACTIVE_CODE){
+                // 激活成功，升级为SVIP
+                user.isSvip = true;
+                DB.setUser(user);
+                // 更新所有用户存储
+                const allUsers = DB.getAllUsers();
+                if(allUsers[user.name]) allUsers[user.name].isSvip = true;
+                DB.saveAllUsers(allUsers);
 
-                    <div class="code-task">✍️ 请在下方编写代码：</div>
-                    <textarea class="code-editor" id="codeArea" placeholder="编写${lang}代码..."></textarea>
-                    <button class="run-btn" onclick="runCode('${lang}',${level})">▶️ 运行代码</button>
-                    <div class="output-box" id="outputArea">运行结果...</div>
-                    <button class="pass-btn" id="passBtn" onclick="passLevel('${lang}',${level})">✅ 提交通关</button>
-                `;
+                // ====================== 核心：SVIP激活后同步解锁网安靶场 ======================
+                const cyberStatus = DB.getCyberStatus();
+                cyberStatus.activated = true;
+                DB.saveCyberStatus(cyberStatus);
+                initCyberLevelSelect(); // 刷新网安关卡
+
+                refreshUserStatus();
+                renderVipStatus();
+                dom.svipActiveBox.style.display = "none";
+                showTip("🎉 激活码验证成功！已升级SVIP+解锁全部网安靶场！");
             }else{
-                dom.tabContent.innerHTML = `<div class="question-item"><h4>编程选择题</h4></div>`;
+                showTip("❌ 激活码错误，请重新输入！");
             }
         }
 
-        function passLevel(lang,level){
-            const progress = DB.getProgress();
-            if(progress[lang+"Level"] < level){
-                progress[lang+"Level"] = level;
-                DB.saveProgress(progress);
-            }
-            showTip(`恭喜通关${lang=="python"?"Python":"C++"}第${level}关！`);
-            renderMap();
-        }
-
-        dom.cyberRangeBtn.onclick = function(){
-            dom.mapPanel.style.display = "none";
-            dom.studyPanel.style.display = "none";
-            dom.knowledgePanel.style.display = "none";
-            dom.cyberRangePanel.style.display = "block";
-            dom.cyberTutorialModal.style.display = "flex";
-            showTip("已进入网安靶场模块，新手教程已开启！");
-        }
-
-        dom.enterCyberBtn.onclick = function(){
-            dom.cyberTutorialModal.style.display = "none";
-            setTimeout(()=>{
-                showHintPanel("💡 提示：输入iptables -A INPUT -p tcp --dport 22 -j DROP 可关闭22端口，阻止SSH暴力破解！");
-            }, 1000);
-            startCyberTimer();
-        }
-
-        function showHintPanel(text){
-            dom.hintPanel.innerText = text;
-            dom.hintPanel.style.display = "block";
-            setTimeout(()=>{
-                dom.hintPanel.style.display = "none";
-            }, 8000);
-        }
-
-        dom.terminalInput.addEventListener('keydown', function(e){
-            if(e.key === 'Enter'){
-                const cmd = this.value.trim();
-                if(cmd === "iptables -A INPUT -p tcp --dport 22 -j DROP"){
-                    dom.sandboxTerminal.innerHTML += `<br>admin@school-server:~$ ${cmd}<br>[成功] 已添加防火墙规则，关闭22端口！<br>[系统] 攻击流量已被阻断，服务器恢复安全！`;
-                    dom.statusIndicator.className = "status-indicator status-safe";
-                    document.querySelector(".server-status span").innerText = "服务器状态：安全";
-                    showTip("✅ 防御指令执行成功！服务器已安全！");
-                    setTimeout(()=>{
-                        dom.cyberResult.style.display = "block";
-                        dom.resultTitle.innerText = "🎉 防御成功！";
-                        dom.resultTitle.className = "result-title result-success";
-                        dom.resultDesc.innerText = `你成功阻断了SSH暴力破解攻击！\n本次练习用时：${9 - parseInt(dom.cyberTimer.innerText.split(':')[0])}分${60 - parseInt(dom.cyberTimer.innerText.split(':')[1])}秒`;
-                    }, 1500);
-                }else{
-                    dom.sandboxTerminal.innerHTML += `<br>admin@school-server:~$ ${cmd}<br>[错误] 指令无效！请输入正确的防御指令（iptables -A INPUT -p tcp --dport 22 -j DROP）`;
-                    showTip("❌ 指令错误！请参考提示输入正确的防御指令！");
-                    showHintPanel("💡 正确指令：iptables -A INPUT -p tcp --dport 22 -j DROP （关闭22端口阻止SSH暴力破解）");
+        // ====================== 网安靶场逻辑（SVIP权限控制） ======================
+        function initCyberLevelSelect(){
+            dom.cyberLevelSelect.innerHTML = "";
+            const cyberStatus = DB.getCyberStatus();
+            const user = DB.getUser();
+            for(let i=1; i<=100; i++){
+                const levelItem = document.createElement("div");
+                levelItem.className = "cyber-level-item";
+                levelItem.innerText = i;
+                // SVIP解锁全部关卡，非SVIP仅第一关免费
+                if(i === 1){levelItem.classList.add("free");}
+                else if(!user.isSvip && !cyberStatus.activated){levelItem.classList.add("locked");levelItem.title = "需SVIP解锁";}
+                
+                if(i === cyberStatus.currentLevel) levelItem.classList.add("active");
+                levelItem.onclick = ()=>{
+                    if(levelItem.classList.contains("locked")) return showTip("该关卡需SVIP会员解锁！");
+                    cyberStatus.currentLevel = i;DB.saveCyberStatus(cyberStatus);loadCyberLevel(i);
+                    document.querySelectorAll(".cyber-level-item").forEach(item=>item.classList.remove("active"));
+                    levelItem.classList.add("active");
                 }
-                this.value = "";
+                dom.cyberLevelSelect.appendChild(levelItem);
             }
-        });
+        }
+
+        function loadCyberLevel(level){
+            if(level < 1 || level > CYBER_LEVEL_STORIES.length) return;
+            const story = CYBER_LEVEL_STORIES[level-1];
+            dom.storyContent.innerHTML = story.content;
+            dom.sandboxTerminal.innerHTML = story.terminalInit;
+            dom.statusIndicator.className = "status-indicator";
+            dom.terminalInput.value = "";
+            dom.cyberTimer.innerText = "09:59";
+            dom.terminalInput.onkeydown = (e)=>{if(e.key === "Enter") checkCyberDefense(level);}
+        }
+
+        function checkCyberDefense(level){
+            const inputCmd = dom.terminalInput.value.trim();
+            const story = CYBER_LEVEL_STORIES[level-1];
+            if(inputCmd === story.defenseCmd){
+                dom.sandboxTerminal.innerHTML += `<br>[成功] ${story.successMsg}`;
+                dom.statusIndicator.classList.add("status-safe");
+                dom.storyContent.innerHTML += `<div class="defense-success">${story.successMsg}</div>`;
+                setTimeout(()=>{
+                    dom.cyberResult.style.display = "block";
+                    dom.resultTitle.innerText = `🎉 ${level}关防御成功！`;
+                }, 1000);
+            }else{
+                dom.sandboxTerminal.innerHTML += `<br>[失败] 指令错误！`;
+                showTip("指令错误，查看提示！");
+            }
+            dom.terminalInput.value = "";
+        }
+
+        dom.cyberRangeBtn.onclick = ()=>{
+            dom.mapPanel.style.display = "none";dom.studyPanel.style.display = "none";
+            dom.knowledgePanel.style.display = "none";dom.vipPanel.style.display = "none";
+            dom.cyberRangePanel.style.display = "block";dom.cyberTutorialModal.style.display = "flex";
+            initCyberLevelSelect();loadCyberLevel(DB.getCyberStatus().currentLevel);
+        }
+
+        dom.enterCyberBtn.onclick = ()=>{dom.cyberTutorialModal.style.display = "none";}
+        dom.resultBtn.onclick = ()=>{dom.cyberResult.style.display = "none";loadCyberLevel(DB.getCyberStatus().currentLevel);}
+        dom.hintBtn.onclick = ()=>{
+            const story = CYBER_LEVEL_STORIES[DB.getCyberStatus().currentLevel-1];
+            dom.hintPanel.style.display = "block";dom.hintPanel.innerText = `正确指令：${story.defenseCmd}`;
+            setTimeout(()=>dom.hintPanel.style.display="none",5000);
+        }
+        dom.restartBtn.onclick = ()=>{loadCyberLevel(DB.getCyberStatus().currentLevel);showTip("已重启！");}
+        
+        let timerInterval;
+        dom.pauseBtn.onclick = ()=>{
+            if(dom.pauseBtn.innerText === "暂停游戏"){dom.pauseBtn.innerText = "继续游戏";clearInterval(timerInterval);}
+            else{dom.pauseBtn.innerText = "暂停游戏";startCyberTimer();}
+        }
 
         function startCyberTimer(){
-            let minutes = 9;
-            let seconds = 59;
-            dom.cyberTimer.innerText = "09:59";
-            
-            const timer = setInterval(()=>{
-                if(seconds === 0){
-                    if(minutes === 0){
-                        clearInterval(timer);
-                        dom.cyberResult.style.display = "block";
-                        dom.resultTitle.innerText = "❌ 防御失败！";
-                        dom.resultTitle.className = "result-title result-fail";
-                        dom.resultDesc.innerText = "时间已到！黑客已成功入侵服务器，保护失败！\n请重新开始练习！";
-                        return;
-                    }
-                    minutes--;
-                    seconds = 59;
-                }else{
-                    seconds--;
-                }
-                
-                const minStr = minutes < 10 ? `0${minutes}` : minutes;
-                const secStr = seconds < 10 ? `0${seconds}` : seconds;
-                dom.cyberTimer.innerText = `${minStr}:${secStr}`;
-            }, 1000);
-            
-            dom.pauseBtn.onclick = function(){
-                if(this.innerText === "暂停游戏"){
-                    clearInterval(timer);
-                    this.innerText = "继续游戏";
-                    showTip("⏸️ 游戏已暂停！");
-                }else{
-                    startCyberTimer();
-                    this.innerText = "暂停游戏";
-                    showTip("▶️ 游戏已继续！");
-                }
-            }
-            
-            dom.restartBtn.onclick = function(){
-                clearInterval(timer);
-                dom.cyberTimer.innerText = "09:59";
-                dom.statusIndicator.className = "status-indicator";
-                document.querySelector(".server-status span").innerText = "服务器状态：遭受攻击中";
-                dom.sandboxTerminal.innerHTML = "[系统] 校园服务器防御沙盒已启动<br>[系统] 当前时间：08:00:00<br>[告警] SSH暴力破解攻击检测 - 来源IP：192.168.1.100<br>[提示] 输入防御指令保护服务器！";
-                dom.terminalInput.value = "";
-                dom.cyberResult.style.display = "none";
-                startCyberTimer();
-                showTip("🔄 靶场已重置，重新开始！");
-            }
-            
-            dom.hintBtn.onclick = function(){
-                showHintPanel(`💡 核心防御原理：
-1. iptables是Linux防火墙工具，用于管理网络规则
-2. --dport 22 指定目标端口为22（SSH端口）
-3. -j DROP 表示丢弃所有访问22端口的TCP数据包
-4. 完整指令：iptables -A INPUT -p tcp --dport 22 -j DROP`);
-            }
-            
-            dom.resultBtn.onclick = function(){
-                dom.cyberResult.style.display = "none";
-                dom.cyberRangePanel.style.display = "none";
-                dom.cyberTutorialModal.style.display = "flex";
-                clearInterval(timer);
-            }
+            let m=9,s=59;
+            timerInterval = setInterval(()=>{
+                s--;if(s<0){m--;s=59;}
+                if(m<0){clearInterval(timerInterval);dom.cyberResult.style.display="block";dom.resultTitle.innerText="时间到！失败！";return;}
+                dom.cyberTimer.innerText = `${m.toString().padStart(2,0)}:${s.toString().padStart(2,0)}`;
+            },1000);
+        }
+        startCyberTimer();
+
+        // 隐蔽兑换码
+        dom.secretCodeBtn.onclick = ()=>{dom.codeModal.style.display = "flex";}
+        dom.codeModal.onclick = (e)=>{if(e.target===dom.codeModal) dom.codeModal.style.display="none";}
+        dom.codeSubmitBtn.onclick = ()=>{
+            if(dom.codeInput.value.trim()===ACTIVATION_CODE){
+                const cyberStatus = DB.getCyberStatus();cyberStatus.activated=true;DB.saveCyberStatus(cyberStatus);
+                initCyberLevelSelect();showTip("兑换码激活成功！解锁全部网安关卡！");dom.codeModal.style.display="none";
+            }else showTip("兑换码错误！");
         }
 
-        function closeLottery(){
-            dom.lotteryModal.style.display = "none";
-            dom.prizeResult.style.display = "none";
-            document.getElementById("drawBtn").style.display = "inline-block";
-        }
-
-        document.getElementById("drawBtn").onclick = function(){
-            const drawBtn = this;
-            const prizeList = [
-                "🎉 一等奖：编程考级全套题库",
-                "🎁 二等奖：VIP会员30天",
-                "🎊 三等奖：在线编程实战课程",
-                "✨ 四等奖：敲码星球定制头像框",
-                "🎈 参与奖：500学习积分"
-            ];
-            
-            const randomPrize = prizeList[Math.floor(Math.random() * prizeList.length)];
-            
-            dom.prizeResult.innerText = randomPrize;
-            dom.prizeResult.style.display = "block";
-            
-            drawBtn.style.display = "none";
-            showTip("抽奖成功！恭喜获得奖品~");
-        }
+        // 初始化
+        refreshUserStatus();
     </script>
 </body>
 </html>
